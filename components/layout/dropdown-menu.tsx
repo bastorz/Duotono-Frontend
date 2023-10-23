@@ -13,7 +13,7 @@ import { ChevronDown } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-const dropdownMenu = () => {
+const Dropdown = () => {
     const pathname = usePathname();
 
     return (
@@ -35,4 +35,4 @@ const dropdownMenu = () => {
     )
 }
 
-export default dropdownMenu
+export default Dropdown
