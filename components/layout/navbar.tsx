@@ -1,13 +1,13 @@
 import Link from "next/link";
-import {ShoppingCart, Tally3} from "lucide-react"
+import {ChevronDown, ShoppingCart, Tally3} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {SearchInput} from "@/components/ui/searchInput"
 import Image from 'next/image'
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx"
-import routes from "@/constants/routes"
-import { cn } from "@/lib/utils"
+import DropdownMenu from "./dropdown-menu";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -63,27 +63,18 @@ const Navbar = () => {
         )}
 
         {(screenWidth > 1025) && (
-            <div className="flex items-center justify-evenly">
+            <nav className="flex items-center justify-evenly">
                 <div className="relative flex h-16 items-center">
                     <Link href="/" className="flex gap-x-2">
                         <Image src="/Logo.svg" alt="Duotono Logo" width={200} height={200}/>
                     </Link>
                 </div>
                 <SearchInput/>
-                <nav className="mx-6 flex items-center space-x-4 lg:space-x-12">
-                    {routes.map((route) => (
-                        <Link
-                        key={route.href}
-                        href={route.href}
-                        className={cn(
-                            'font-medium transition-colors hover:text-black',
-                            pathname === route.href ? 'text-black' : 'text-black/60'
-                        )}
-                        >
-                        {route.label}
-                    </Link>
-                    ))}
-                </nav>
+                <div className="mx-6 flex items-center space-x-4 lg:space-x-12">
+                    <DropdownMenu/>
+                    <Link href="/servicios-de-diseno" className={cn(pathname === '/servicios-de-diseno' ? 'text-black' : 'text-black/80')}>Nuestros servicios</Link>
+                    <Link href="/quienes-somos" className={cn(pathname === '/quienes-somos' ? 'text-black' : 'text-black/80')}>Quienes somos</Link>
+                </div>  
                 <div className="flex items-center gap-x-10">
                     <Link href="/contacto">
                         <Button variant="default" className="bg-first rounded-lg hover:bg-first/80 transition duration-200">
@@ -97,11 +88,11 @@ const Navbar = () => {
                                 size={20}
                                 color="white"
                             />
-                            <span className="text-white">3</span>
+                            <span className="text-white">4</span>
                         </Button>
                     </Link>
                 </div>
-            </div>
+            </nav>
         )}
     </>
     )
