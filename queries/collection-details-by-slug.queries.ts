@@ -6,6 +6,19 @@ query($slug: String!) {
     id
     name
     slug
+    description
+    productVariants {
+      items {
+        product {
+          name
+        	slug
+          description
+          featuredAsset {
+            preview
+          }
+        }
+      }
+    }
     children {
       name
       id
@@ -14,18 +27,10 @@ query($slug: String!) {
       featuredAsset {
         preview
       }
-			productVariants {
+      productVariants {
         items {
-          price
-          priceWithTax
-        	product {
+          product {
             name
-            slug
-            id
-            description
-            featuredAsset {
-              preview
-            }
           }
         }
       }

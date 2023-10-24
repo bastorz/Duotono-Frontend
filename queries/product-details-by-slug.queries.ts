@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const productDetailsBySlug = gql`
+export const getProductBySlug = gql`
   query ($slug: String!) {
     product(slug: $slug) {
       id
@@ -14,23 +14,17 @@ export const productDetailsBySlug = gql`
         height
         preview
       }
-      facetValues {
-        name
-        code
-        id
-        facet {
-          name
-        }
-      }
       variantList {
         totalItems
       }
       variants {
-        sku
         name
         productId
         price
         id
+      }
+      collections {
+        slug
       }
     }
   }
