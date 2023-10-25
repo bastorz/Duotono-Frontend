@@ -1,31 +1,36 @@
 import { gql } from "@apollo/client";
 
 export const getProductBySlug = gql`
-  query ($slug: String!) {
-    product(slug: $slug) {
-      id
+query($slug: String!) {
+  product(slug: $slug) {
+    id
+    name
+    slug
+    description
+    featuredAsset{
+      preview
+    }
+    optionGroups {
       name
-      createdAt
-      updatedAt
-      name
-      description
-      featuredAsset {
-        width
-        height
-        preview
-      }
-      variantList {
-        totalItems
-      }
-      variants {
+      customFields
+      options {
         name
-        productId
-        price
-        id
+        customFields {
+          Price
+        }
       }
-      collections {
+    }
+    variants{
+      customFields
+      name
+      price
+    }
+		collections {
+      name
+      parent {
         slug
       }
     }
   }
+}
 `;
