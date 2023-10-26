@@ -10,15 +10,16 @@ import { cn } from "@/lib/utils";
 import { optionGroups } from "@/types/optionGroups-type";
 import { Check, Pencil } from "lucide-react";
 import { useState } from "react";
-
-
+import DetailedOrderList from "./detailedOrderList";
 
 interface Props {
     optionGroups: optionGroups[]
+    productPrice: number
 }
 
-const ProductVariantDetails: React.FC<Props> = ({optionGroups}) => {
+const ProductVariantDetails: React.FC<Props> = ({optionGroups, productPrice}) => {
     const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: { optionName: string; optionPrice: number } | null }>({});
+    const groupName = optionGroups.map((optionGroup) => optionGroup.name)
     
     const handleCheckboxChange = (groupName: string, optionName: string, optionPrice: number) => {
         setSelectedOptions((prevSelectedOptions) => {
@@ -31,12 +32,13 @@ const ProductVariantDetails: React.FC<Props> = ({optionGroups}) => {
             // Select the new checkbox
             const updatedOptions = { ...prevSelectedOptions };
             updatedOptions[groupName] = { optionName, optionPrice };
-            console.log(updatedOptions)
             return updatedOptions;
           }
         });
         // Here you can set your data state as required
       };
+
+      console.log("hola", selectedOptions)
 
     return (
         <>
@@ -52,9 +54,9 @@ const ProductVariantDetails: React.FC<Props> = ({optionGroups}) => {
                                             {selectedOptions[optionGroup.name] ? (<Check className="text-green-500"/>) : (<Pencil className="w-5 h-5"/>)}
                                         </AccordionTrigger>
                                         <AccordionContent className="text-black/60 text-lg mx-4 px-20">
-                                        <div className="grid grid-cols-4 gap-y-4">
+                                        <div className="grid grid-cols-8 gap-y-4">
                                             {optionGroup.options.map((option) => (
-                                                    <div key={option.name} className="col-span-1">
+                                                    <div key={option.name} className="col-span-3">
                                                         <input
                                                             type="checkbox"
                                                             className="mr-2 col-span-1"
@@ -71,17 +73,7 @@ const ProductVariantDetails: React.FC<Props> = ({optionGroups}) => {
                             </div>
                     ))}
                 </div>
-                <div className="border border-black/20 col-span-2 rounded-xl p-10 max-h-[1000px]">
-                    <h5 className="font-bold text-2xl">Resumen del producto</h5>
-                    <div className="grid grid-cols-1 py-6 gap-y-10">
-                        <div>
-                        <button className="w-full text-end" >Cambiar</button>
-                        <h6 className="text-black/70 text-xl pb-2">Personalización</h6>
-                        <p className="text-black/70 pb-4"></p>
-                        <div className="w-full bg-black h-[1px] opacity-40"/>
-                        </div>
-                    </div>
-                </div>
+                <DetailedOrderList groupNames={groupName} selectedOptions={selectedOptions} productPrice={productPrice} />
             </div>
         </>
     )

@@ -11,7 +11,6 @@ export interface ProductItem {
 }
 
 export interface ProductVariant {
-  sku: string;
   name: string;
   productId: number;
   price: number;

@@ -6,8 +6,10 @@ import Image from "next/image";
 import { formatter } from "@/lib/utils";
 import { ProductDetailedTabs } from "@/components/tienda/productos/ProductDetailedTabs";
 import { Button } from "@/components/ui/button";
-import ProductVariantDetails from "@/components/tienda/productos/productVariantDetails";
+// import ProductVariantDetails from "@/components/tienda/productos/productVariantDetails";
 import { optionGroup } from "@/types/optionGroups-type";
+import { Product } from "@/types/collections-type";
+import ProductVariantDetails from "@/components/tienda/productos/productVariantDetails";
 
 export default async function Page({params}: {params: {slug: string}}) {
 
@@ -15,6 +17,9 @@ export default async function Page({params}: {params: {slug: string}}) {
   const {product} = await fetchProductBySlug(paramsSlug)
   const collectionSlug = product.collections.map((collection: { slug: string }) => collection.slug)
   const optionGroups =  product.optionGroups.map((option: optionGroup) => option)
+  const productPrice = product.variants.map((variant: Product) => variant.price)
+
+  console.log(product.variants.map((variant: Product) => variant.price))
   const redirectToStore = `/tienda/categorias/${collectionSlug}`
 
   return (
@@ -63,7 +68,7 @@ export default async function Page({params}: {params: {slug: string}}) {
               </div>
             </div>
       </div>
-          <ProductVariantDetails optionGroups={optionGroups} />
+          <ProductVariantDetails optionGroups={optionGroups} productPrice={productPrice} />
     </div>
   )
 }
