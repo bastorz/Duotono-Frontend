@@ -21,6 +21,7 @@ query($slug: String!) {
       }
     }
     variants{
+      id
       customFields
       name
       price

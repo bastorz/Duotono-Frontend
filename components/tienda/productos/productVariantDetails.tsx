@@ -6,7 +6,7 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/productVariantDetailsAccordion"
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { optionGroups } from "@/types/optionGroups-type";
 import { Check, Pencil } from "lucide-react";
 import { useState } from "react";
@@ -15,9 +15,10 @@ import DetailedOrderList from "./detailedOrderList";
 interface Props {
     optionGroups: optionGroups[]
     productPrice: number
+    variantId: string
 }
 
-const ProductVariantDetails: React.FC<Props> = ({optionGroups, productPrice}) => {
+const ProductVariantDetails: React.FC<Props> = ({optionGroups, productPrice, variantId}) => {
     const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: { optionName: string; optionPrice: number } | null }>({});
     const groupName = optionGroups.map((optionGroup) => optionGroup.name)
     
@@ -35,10 +36,16 @@ const ProductVariantDetails: React.FC<Props> = ({optionGroups, productPrice}) =>
             return updatedOptions;
           }
         });
-        // Here you can set your data state as required
       };
 
-      console.log("hola", selectedOptions)
+      // Function to clear selected options for a specific option from the child.
+      const clearSelectedOptions = (groupName: string) => {
+        setSelectedOptions((prevSelectedOptions) => {
+          const updatedOptions = { ...prevSelectedOptions };
+          updatedOptions[groupName] = null;
+          return updatedOptions;
+        });
+      };
 
     return (
         <>
@@ -73,10 +80,55 @@ const ProductVariantDetails: React.FC<Props> = ({optionGroups, productPrice}) =>
                             </div>
                     ))}
                 </div>
-                <DetailedOrderList groupNames={groupName} selectedOptions={selectedOptions} productPrice={productPrice} />
+                <DetailedOrderList groupNames={groupName} selectedOptions={selectedOptions} productPrice={productPrice} variantId={variantId} clearSelectedOptions={clearSelectedOptions}/>
             </div>
         </>
     )
 }
 
 export default ProductVariantDetails
+
+
+// EJEMPLO DE COMO SERÍA CON ICONOS.
+
+
+// {optionGroup.options.map((option) => (
+//   <div key={option.name} className="col-span-3">
+//       {option.name === "A6 105 X 148 mm" ? (
+//             <button onClick={() =>
+//               handleCheckboxChange(
+//                   optionGroup.name,
+//                   option.name,
+//                   option.customFields.Price
+//               )}>
+//             <img src="/1.png" alt="Test Image" /></button>
+//       ) : option.name === "A4 210 x 297 mm" ? (
+//           <button onClick={() =>
+//             handleCheckboxChange(
+//                 optionGroup.name,
+//                 option.name,
+//                 option.customFields.Price
+//             )}>
+//           <img src="/2.png" alt="Test Image" /></button>
+//        ) : 
+//        (
+//           <>
+//                 <input
+//                     type="checkbox"
+//                     className="mr-2 col-span-1"
+//                     checked={selectedOptions[optionGroup.name]?.optionName === option.name}
+//                     onChange={() =>
+//                         handleCheckboxChange(
+//                             optionGroup.name,
+//                             option.name,
+//                             option.customFields.Price
+//                         )
+//                     }
+//                 />
+//                 <label htmlFor={`checkbox-${option.name}`}>
+//                     {option.name === "A6 105 X 148 mm" ? "" : option.name}
+//                 </label>
+//           </>
+//         )}
+//     </div>
+// ))}

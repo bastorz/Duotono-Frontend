@@ -20,6 +20,7 @@ export interface Subcollection {
 
 export interface Product {
     name: string,
+    id: string,
     slug: string,
     featuredAsset: Asset
     price: number

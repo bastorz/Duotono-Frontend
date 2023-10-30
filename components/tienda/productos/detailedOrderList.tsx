@@ -1,20 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { formatter } from "@/lib/utils";
-import { group } from "console";
-import { format } from "path";
-import { useState } from "react";
+import { getClient } from "@/lib/client";
+import { formatCurrency} from "@/lib/utils";
+import { AddItemToOrder } from "@/queries/add-item-to-cart.mutation";
+import axios from "axios";
+import { error } from "console";
 
 interface SelectedOptions {
     [key: string]: { optionName: string; optionPrice: number } | null;
-  }
+}
 
 interface Props {
     groupNames: string[]
     selectedOptions: SelectedOptions
     productPrice: number
+    variantId: string
+    clearSelectedOptions: (groupName: string) => void;
 }
 
-const DetailedOrderList:React.FC<Props> = ({selectedOptions, groupNames, productPrice}) => {
+const DetailedOrderList:React.FC<Props> = ({selectedOptions, groupNames, productPrice, variantId, clearSelectedOptions}) => {
 
     const priceArray: number[] = []
     groupNames.forEach((groupName) => {
@@ -26,10 +29,16 @@ const DetailedOrderList:React.FC<Props> = ({selectedOptions, groupNames, product
     const rawTotalPrice = Number(productPrice) + Number(extraPrice)
     const taxes = (21 / 100) * (rawTotalPrice)
     const rawTotalPriceOutOfTaxes = Number(rawTotalPrice) - Number(taxes)
+    const totalPrice = formatCurrency(rawTotalPrice) 
+    const totalPriceOutOfTaxes = formatCurrency(rawTotalPriceOutOfTaxes)
 
-    const totalPrice = formatter.format(rawTotalPrice / 100) 
-    const totalPriceOutOfTaxes = formatter.format(rawTotalPriceOutOfTaxes / 100)
-
+    const handleAddItemToOrder = async () => {
+      try {
+        const response = await axios.post('/api/addItemToCart', {totalPrice: totalPrice, variantId: variantId[0], quantity: 1   });
+      } catch (error) {
+        console.error("An error occurred: ", error)
+      }
+    }
 
     return (
         <div className="border border-black/20 col-span-2 rounded-xl p-10">
@@ -37,7 +46,7 @@ const DetailedOrderList:React.FC<Props> = ({selectedOptions, groupNames, product
             {groupNames.map((groupName) => (
                 <div className="grid grid-cols-1 py-6 gap-y-10">
                     <div>
-                        <button className="w-full text-end text-lg">Cambiar</button>
+                        <button onClick={() => clearSelectedOptions(groupName)} className="w-full text-end text-lg">Cambiar</button>
                         <h6 className="text-black/70 text-xl pb-2">{groupName}</h6>
                             {selectedOptions[groupName]?.optionName}
                         <p className="text-black/70 pb-4"></p>
@@ -50,10 +59,11 @@ const DetailedOrderList:React.FC<Props> = ({selectedOptions, groupNames, product
                 <div className=""></div>
                 <p className="text-end text-xl font-semibold">IVA EXCL. {totalPriceOutOfTaxes}</p>
                 <p className="text-end text-xl font-semibold">IVA INCL. {totalPrice}</p>
-                <Button variant="defaultBlack" className="mt-10 text-lg">Pedir ahora</Button>
+                <Button variant="defaultBlack" className="mt-10 text-lg" onClick={handleAddItemToOrder}>Pedir ahora</Button>
             </div>
          </div>
     )
 }
 
 export default DetailedOrderList
+
