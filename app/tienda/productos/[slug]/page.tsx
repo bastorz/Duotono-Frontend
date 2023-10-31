@@ -1,5 +1,5 @@
 import { getClient } from "@/lib/client";
-import { getProductBySlug } from "@/queries/product-details-by-slug.queries";
+import { getProductBySlug } from "@/queries/get-product-details-by-slug.queries";
 import { ArrowRight, ChevronRight, Home, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,10 +19,14 @@ export default async function Page({params}: {params: {slug: string}}) {
   const collectionSlug = product.collections.map((collection: { slug: string }) => collection.slug)
   const optionGroups =  product.optionGroups.map((option: optionGroup) => option)
   const productPrice = product.variants.map((variant: Product) => variant.price)
-  const variantId = product.variants.map((variant: Product) => variant.id)
+  const variants = product.variants.map((variant: Product) => variant)
   const redirectToStore = `/tienda/categorias/${collectionSlug}`
+  
+  // const variantId = product.variants.findOne()
 
-  console.log(product)
+  const productVariantOptions = product.variants.map((variant: any) => variant.options.map((option: any) => option.name))
+
+  console.log("producto", variants.find((variant: any) => variant.options.every((option: any) => option.name)))
 
   return (
     <div>
@@ -70,7 +74,7 @@ export default async function Page({params}: {params: {slug: string}}) {
               </div>
             </div>
       </div>
-          <ProductVariantDetails optionGroups={optionGroups} productPrice={productPrice} variantId={variantId}
+          <ProductVariantDetails optionGroups={optionGroups} productPrice={productPrice} variants={variants}
       />
     </div>
   )

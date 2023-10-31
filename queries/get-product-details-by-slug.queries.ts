@@ -25,6 +25,9 @@ query($slug: String!) {
       customFields
       name
       price
+      options {
+        name
+      }
     }
 		collections {
       name

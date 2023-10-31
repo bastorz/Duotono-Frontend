@@ -25,11 +25,9 @@ const DetailedOrderList:React.FC<Props> = ({selectedOptions, groupNames, product
         priceArray.push(price || 0); 
     });
 
-    const extraPrice = priceArray.reduce((total, currentPrice) => total + currentPrice, 0)
-    const rawTotalPrice = Number(productPrice) + Number(extraPrice)
-    const taxes = (21 / 100) * (rawTotalPrice)
-    const rawTotalPriceOutOfTaxes = Number(rawTotalPrice) - Number(taxes)
-    const totalPrice = formatCurrency(rawTotalPrice) 
+    const taxes = (21 / 100) * (productPrice)
+    const rawTotalPriceOutOfTaxes = Number(productPrice) - Number(taxes)
+    const totalPrice = formatCurrency(productPrice) 
     const totalPriceOutOfTaxes = formatCurrency(rawTotalPriceOutOfTaxes)
 
     const handleAddItemToOrder = async () => {

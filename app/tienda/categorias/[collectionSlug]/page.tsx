@@ -2,7 +2,7 @@ import CategoryBanner from "@/components/tienda/categorias/category-banner";
 import CollectionCard from "@/components/tienda/categorias/category-card";
 import FAQ from "@/components/tienda/categorias/faq";
 import { getClient } from "@/lib/client";
-import { getCollectionBySlug } from "@/queries/collection-details-by-slug.queries";
+import { getCollectionBySlug } from "@/queries/get-collection-details-by-slug.queries";
 import { Subcollection } from "@/types/collections-type";
 import { redirect } from "next/navigation";
 
