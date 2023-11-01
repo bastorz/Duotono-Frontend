@@ -20,3 +20,13 @@ export interface OrderPartial {
     }>;
   }
   
+  export interface ProductVariantPartial {
+    id: string;
+    name: string;
+    sku: string;
+    stockLevel: string;
+    currencyCode: string;
+    price: number;
+    priceWithTax: number;
+  }
+  

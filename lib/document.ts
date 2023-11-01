@@ -116,3 +116,38 @@ export const REMOVE_COUPON_CODE = /*GraphQL*/ `
   }
   ${ACTIVE_ORDER_FRAGMENT}
 `;
+
+export const GET_PRODUCT_DETAIL = /*GraphQL*/ `
+query GetProductDetail($slug: String!) {
+  product(slug: $slug) {
+    id
+    name
+    description
+    featuredAsset {
+      id
+      preview
+    }
+    assets {
+      id
+      preview
+    }
+    variants {
+      id
+      name
+      sku
+      stockLevel
+      currencyCode
+      price
+      priceWithTax
+      featuredAsset {
+        id
+        preview
+      }
+      assets {
+        id
+        preview
+      }
+    }
+  }
+}
+`;

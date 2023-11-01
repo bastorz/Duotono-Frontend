@@ -30,18 +30,16 @@ const ProductVariantDetails: React.FC<Props> = ({optionGroups, productPrice, var
     const groupName = optionGroups.map((optionGroup) => optionGroup.name)
     console.log("producto", variants.find((variant: any) => variant.options.every((option: any) => option.name)))
     
-    
-    
     const productVariant = variants.find((variant) => {
       console.log("Object.entries(selectedOptions)", Object.entries(selectedOptions))
       // Verifica si todas las opciones seleccionadas coinciden con las opciones de la variante
       return Object.entries(selectedOptions).every(([option, value]) => {
-          console.log("option", option)
-          console.log("value", value)
+          // console.log("option", option)
+          // console.log("value", value)
           variant.options.some((variantOption: any) => {
-              console.log("variantOption", variantOption)
-              console.log("value?.optionName", value?.optionName)
-              console.log("variantOption.name === value?.optionName", variantOption.name === value?.optionName)
+              // console.log("variantOption", variantOption)
+              // console.log("value?.optionName", value?.optionName)
+              // console.log("variantOption.name === value?.optionName", variantOption.name === value?.optionName)
               variantOption.name === value?.optionName
             }
           )}
