@@ -123,6 +123,15 @@ query GetProductDetail($slug: String!) {
     id
     name
     description
+    optionGroups {
+      name
+      options {
+        name
+        customFields {
+          price
+        }
+      }
+    }
     featuredAsset {
       id
       preview
