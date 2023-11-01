@@ -139,6 +139,9 @@ query GetProductDetail($slug: String!) {
       currencyCode
       price
       priceWithTax
+      options {
+        name
+      }
       featuredAsset {
         id
         preview

@@ -58,6 +58,8 @@ const paramsSlug = params.slug
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
 
+  console.log("selectedVariant", selectedVariant)
+
   return (
     <div className='p-20 flex flex-col space-y-4'>
       <h1>{productData.product.name}</h1>
@@ -88,7 +90,9 @@ const paramsSlug = params.slug
                 selectedVariant.currencyCode
               )}
             </strong>
+            <div>{selectedVariant.options.map((option) => option.name)}</div>
           </div>
+          {/* <div>{selectedVariant.options}</div> */}
           <form method="post" onSubmit={addItem}>
             <input name="quantity" type="number" min="0" defaultValue={1} />
             <button type="submit">Add to cart</button>
