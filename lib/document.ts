@@ -22,7 +22,15 @@ fragment ActiveOrder on Order {
     productVariant {
       id
       name
+      price
       sku
+      options {
+        name
+        code
+        customFields{
+          price
+        }
+      }
     }
     featuredAsset {
       id

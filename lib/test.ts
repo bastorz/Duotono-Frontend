@@ -1,6 +1,13 @@
 import { DocumentNode } from 'graphql';
 import React from 'react';
 
+interface QueryResult<T> {
+  data: T | null;
+  loading: boolean;
+  error: any; // Replace 'any' with the appropriate type for your error
+}
+
+
 // If using bearer-token based session management, we'll store the token
 // in localStorage using this key.
 const AUTH_TOKEN_KEY = 'auth_token';
@@ -57,19 +64,19 @@ export function query(document: string | DocumentNode, variables: Record<string,
  * Here we have wrapped the `query` function into a React hook for convenient use in
  * React components.
  */
-export function useQuery(
+export function useQuery<T>(
   document: string | DocumentNode,
   variables: Record<string, any> = {},
   deps: any[] = []
-) {
-  const [data, setData] = React.useState(null);
+): QueryResult<T> {
+  const [data, setData] = React.useState<T | null>(null);
   const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState(null);
+  const [error, setError] = React.useState<any>(null);
 
   React.useEffect(() => {
     query(document, variables)
       .then((result) => {
-        setData(result.data);
+        setData(result.data as T);
         setError(null);
       })
       .catch((err) => {

@@ -1,50 +1,22 @@
 "use client"
 
 import { query, useQuery } from '@/lib/test';
-import { OrderPartial } from '@/lib/type';
-import { ADD_ITEM_TO_ORDER, ADJUST_ORDER_LINE, GET_ACTIVE_ORDER, REMOVE_ITEM_FROM_ORDER } from '@/lib/document';
-import { VendureAsset } from '@/components/tienda/prueba/VendureAsset';
+import { OrderData, OrderPartial } from '@/lib/type';
+import { GET_ACTIVE_ORDER, REMOVE_ITEM_FROM_ORDER } from '@/lib/document';
 import { formatCurrency } from '@/lib/utils';
 import { useState } from 'react';
+import Image from "next/image";
+import { ArrowRight, Pencil, ShoppingCart, Trash } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function Prueba() {
   const [activeOrder, setActiveOrder] = useState<OrderPartial>();
-  const { data, loading, error } = useQuery(GET_ACTIVE_ORDER);
+  const { data: orderData, loading, error } = useQuery<OrderData>(GET_ACTIVE_ORDER);
 
-  if (data?.activeOrder && !activeOrder) {
-      setActiveOrder(data.activeOrder);
+  if (orderData?.activeOrder && !activeOrder) {
+      setActiveOrder(orderData.activeOrder as any);
     } 
-
-  const addItem = async (event: React.FormEvent<HTMLFormElement>) => {
-    // Prevent the browser from reloading the page
-    event.preventDefault();
-    // Read the form data
-    const form = event.target;
-    const variantId = new FormData(form).get('productVariantId');
-    const result = await query(ADD_ITEM_TO_ORDER, {
-      productVariantId: variantId,
-      quantity: 1,
-    });
-    if (result.data.addItemToOrder.__typename !== 'Order') {
-      // An error occurred!
-      window.alert(result.data.addItemToOrder.message);
-    } else {
-      setActiveOrder(result.data.addItemToOrder);
-    }
-  };
-
-  const adjustOrderLine = async (orderLineId: string, quantity: number) => {
-    const result = await query(ADJUST_ORDER_LINE, {
-      orderLineId,
-      quantity,
-    });
-    if (result.data.adjustOrderLine.__typename !== 'Order') {
-      // An error occurred!
-      window.alert(result.data.adjustOrderLine.message);
-    } else {
-      setActiveOrder(result.data.adjustOrderLine);
-    }
-  };
 
   const removeItem = async (orderLineId: string) => {
     const result = await query(REMOVE_ITEM_FROM_ORDER, {
@@ -61,79 +33,109 @@ export default function Prueba() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
 
+  const getTotalPrice = () => {
+    if (activeOrder?.totalWithTax != undefined) {
+      return activeOrder?.totalWithTax
+    }
+    return 0
+  }
+
+  const total = getTotalPrice()
+  const igic = (7 / 100) * total
+  const subTotal = total - igic
+
   return (
     <div className='px-32 py-20'>
-              <form method="post" onSubmit={addItem}>
-        <select name="productVariantId">
-          <option value="77">Balloon Chair</option>
-          <option value="2">Twin Lens Camera</option>
-          <option value="3">Boxing Gloves</option>
-          <option value="4">Spiky Cactus</option>
-        </select>
-        <button type="submit">Add to order</button>
-      </form>
-        <h3 className="font-bold text-4xl">Resumen de compra</h3>
-      <div className='shadow-lg shadow-right shadow-left shadow-bottom p-10'>
+      <h3 className="font-bold text-4xl pb-10">Resumen de compra</h3>
         {activeOrder ? (
-          <table>
-            <tbody>
-              {activeOrder.lines.map((line) => (
-                <div key={line.id} className='grid grid-cols-5'>
-                  <div className='col-span-1'>
-                    <VendureAsset
-                      preview={line.featuredAsset.preview}
-                      preset="tiny"
-                      alt={line.productVariant.name}
-                    />
-                  </div>
-                  <div className='flex flex-col space-y-2 col-span-4'>
-                    <div className='font-semibold'>{line.productVariant.name}</div>
-                    <div>{line.productVariant.description ? line.productVariant.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}</div>
-                    <div className='font-bold'>Detalles del producto</div>
-                    <div className='bg-black h-[2px] w-44'></div>
-                    <div className='font-bold'>Personalización:</div>
-                  </div>
-                  <td>
-                    <div className="qty-cell">
-                      <button
-                        onClick={() => adjustOrderLine(line.id, line.quantity - 1)}
-                      >
-                        -
-                      </button>
-                      <span>{line.quantity}</span>
-                      <button
-                        onClick={() => adjustOrderLine(line.id, line.quantity + 1)}
-                      >
-                        +
-                      </button>
+          <div className='grid grid-cols-6 gap-x-10'>
+              <div className='col-span-4 shadow-lg shadow-right shadow-left shadow-bottom p-10'>
+                {activeOrder.lines.map((line) => (
+                  <div key={line.id} className='grid grid-cols-5 py-10'>
+                    <div className='col-span-1'>
+                    {line.featuredAsset.preview && (
+                      <Image src={line.featuredAsset.preview} alt="Product Preview" width={200} height={200} className='w-[200px] h-[200px] object-cover object-left rounded-xl'/>
+                     )}
                     </div>
-                    <button onClick={() => removeItem(line.id)}>remove</button>
-                  </td>
-                  <td>
-                    {formatCurrency(
-                      line.linePriceWithTax,
-                      activeOrder.currencyCode
-                    )}
-                  </td>
+                    <div className='flex flex-col space-y-2 col-span-4 px-10'>
+                      <div className='flex w-full justify-between'>
+                        <div className='font-semibold pb-4 text-lg'>{line.productVariant.name}</div>
+                        <p className='text-xl font-semibold text-slate-600'>
+                          {formatCurrency(
+                            line.linePriceWithTax,
+                            activeOrder.currencyCode
+                          )}
+                        </p>
+                      </div>
+                      <div className='flex w-full justify-between'>
+                          <div className='flex flex-col space-y-2'>
+                              <div className='font-bold'>Detalles del producto</div>
+                              <div className='bg-black h-[2px] w-44'></div>
+                          </div>
+                          <div className='flex space-x-4 items-center pt-2'>
+                            <Link href={`http://localhost:3001/tienda/productos-prueba/${line.productVariant.name.toLowerCase().replace(/ /g, '-')}`}>
+                              <Pencil/>
+                            </Link>
+                            <button onClick={() => removeItem(line.id)}>
+                              <Trash/>
+                            </button>
+                          </div>
+                      </div>
+                      <div className='py-4'>
+                        {line.productVariant.options.map((option) => (
+                          <div className='flex space-x-4 py-1 items-center'>
+                            <div className='font-bold'>{option.code}:</div>
+                            <div className=''>{option.name}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className='w-full bg-black px-2 h-[1px]'/>
+                    </div>
+                  </div>
+                  
+                ))}
+              </div>
+              <div className='col-span-2 bg-black rounded-xl p-8'>
+                <div className=''>
+                  <h4 className='font-semibold text-2xl text-white mb-4'>Resumen</h4>
+                  {activeOrder.lines.map((line) => (
+                  <div className='flex items-center justify-between space-y-4'>
+                    <p className=' text-white/80'>{line.productVariant.name}</p>
+                    <p className=' text-white/80'>{formatCurrency(line.linePriceWithTax)}</p>
+                  </div>
+                  ))}
                 </div>
-              ))}
-              <tr className="totals">
-                <td></td>
-                <td>Total</td>
-                <td>{activeOrder.totalQuantity}</td>
-                <td>
-                  {formatCurrency(
-                    activeOrder.totalWithTax,
-                    activeOrder.currencyCode
-                  )}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                <div className='w-full bg-white px-2 h-[1px] mt-4'/>
+                <div className='flex flex-col py-6 space-y-10'>
+                  <div className='flex flex-col space-y-2'>
+                    <div className='flex justify-between'>
+                      <p className=' text-white/80'>Subtotal</p>
+                      <p className=' text-white/80'>{formatCurrency(subTotal)}</p>
+                    </div>
+                    <div className='flex justify-between'>
+                        <p className=' text-white/80'>IGIC</p>
+                        <p className=' text-white/80'>{formatCurrency(igic)}</p>
+                    </div>
+                    <div className='flex justify-between'>
+                        <p className=' text-white/80'>Total</p>
+                        <p className=' text-white/80'>{formatCurrency(activeOrder.totalWithTax)}</p>
+                    </div>
+                  </div>
+                    <Button className='font-semibold'>
+                      <ShoppingCart className='mr-4'/>
+                      Pedir ahora
+                      <ArrowRight className='ml-3'/>
+                    </Button>
+                    <div className='flex justify-between'>
+                      <p className=' text-white/80'>Siguiente</p>
+                      <p className=' text-white/80'>Pago / Datos de entrega / Envío de documentos</p>
+                    </div>
+                  </div>
+              </div>
+          </div>
         ) : (
           <div>Order is empty</div>
         )}
-      </div>
     </div>
   );
 }

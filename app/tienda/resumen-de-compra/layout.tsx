@@ -12,8 +12,8 @@ export default function DashboardLayout({
     return (
       <section>
         <Navbar/>
-         {children}
-         <ProductPageBanner/>
+        {children}
+        <ProductPageBanner/>
         <Footer/>
       </section>
     )
