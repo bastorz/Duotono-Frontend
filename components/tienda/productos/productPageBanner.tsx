@@ -12,7 +12,7 @@ export const ProductPageBanner = () => {
                     <Button variant="default" className="bg-white rounded-xl gap-x-2 shrink-0 text-xs xl:text-base hover:bg-first/80 transition duration-200 p-8">Solicitar cotización</Button>
                 </div>
             </div>
-            <div className="my-20">
+            <div className="mt-20 xl:my-20">
                 <Image src="/20.svg" alt="1" width={700} height={700} className="rounded-md"/>
             </div>
         </div>

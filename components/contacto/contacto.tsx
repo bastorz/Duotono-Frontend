@@ -85,13 +85,13 @@ const FileUploadForm = () => {
         <div className="flex flex-col space-y-4">
         <div className="flex flex-col xl:flex-row xl:space-x-4 space-y-4 xl:space-y-0">
           <div className="flex flex-col space-y-2">
-            <label className="font-bold">Name</label>
+            <label className="font-bold">Nombre</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="John"
+              placeholder="Juan Manuel"
               className="w-full xl:max-w-[40rem] p-4 rounded-md"
             />
           </div>
@@ -102,7 +102,7 @@ const FileUploadForm = () => {
               required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              placeholder="Cartier"
+              placeholder="Afonso"
               className="w-full xl:max-w-[40rem] p-4 rounded-md"
             />
           </div>
@@ -114,7 +114,7 @@ const FileUploadForm = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="example@email.com"
+            placeholder="juanmanuel@email.com"
             className="xl:w-[32.5rem] p-4 rounded-md"
           />
         </div>
@@ -126,7 +126,7 @@ const FileUploadForm = () => {
               required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="+34 682 314 242"
+              placeholder="633 333 333"
               className="w-full xl:max-w-[18rem] p-4 rounded-md"
             />
           </div>
@@ -137,7 +137,7 @@ const FileUploadForm = () => {
               required
               value={company}
               onChange={(e) => setCompany(e.target.value)}
-              placeholder="Facebook"
+              placeholder="Duotono"
               className="xl:max-w-[18rem] p-4 rounded-md"
             />
           </div>

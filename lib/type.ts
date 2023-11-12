@@ -49,6 +49,12 @@ export interface OrderPartial {
           }
         }]
       }]
+      customFields: {
+        Descripcion_Extra: string | undefined
+        Especificaciones_Del_Producto: string | undefined
+        Normas_De_Diseno: string | undefined
+        Proceso_De_Pedido: string | undefined
+      }
       featuredAsset: {
         id: string
         preview: string
@@ -112,3 +118,45 @@ export interface SelectedOptions {
   } | null;
 }
 
+export interface EligibleShippingMethodsData {
+  eligibleShippingMethods: [{
+    name: string,
+    id: string
+    price: number
+  }]
+}
+
+export interface ClientSecret {
+  createStripePaymentIntent: string
+}
+
+export interface Collections {
+  collections: {
+    items: [{
+      name: string
+      description: string
+      slug: string
+      featuredAsset: {
+        preview: string
+      }
+    }]
+  }
+}
+
+export interface Collection {
+  collection: {
+    id: string
+    name: string
+    slug: string
+    description: string
+    children: [{
+      name: string
+      id: string,
+      slug: string
+      description: string,
+      featuredAsset: {
+        preview: string
+      }
+    }]
+  }
+}

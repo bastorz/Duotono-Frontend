@@ -19,3 +19,7 @@ export function formatCurrency(value: number, locale?: string) {
       return majorUnits.toFixed(2);
   }
 }
+
+export function removeHTMLTags(str: string | undefined){
+  return str?.replace(/<[^>]*>/g, '');
+};

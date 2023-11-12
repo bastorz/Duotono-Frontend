@@ -1,5 +1,7 @@
+"use client"
+
 import Link from "next/link";
-import {ChevronDown, ShoppingCart, Tally3} from "lucide-react"
+import {ShoppingCart, Tally3} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {SearchInput} from "@/components/ui/searchInput"
 import Image from 'next/image'
@@ -8,10 +10,22 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx"
 import DropdownMenu from "./dropdown-menu";
 import { cn } from "@/lib/utils";
+import { OrderData, OrderPartial } from "@/lib/type";
+import { useQuery } from "@/lib/use-query";
+import { GET_ACTIVE_ORDER } from "@/lib/document";
 
 const Navbar = () => {
     const pathname = usePathname();
     const [toggleMenu, setToggleMenu] = useState(false);
+    const [activeOrder, setActiveOrder] = useState<OrderPartial>();
+    const [activeOrderLenght, setActiveOrderLenght] = useState<number>(0);
+    const { data: orderData, loading, error } = useQuery<OrderData>(GET_ACTIVE_ORDER);
+    
+    if (orderData?.activeOrder && !activeOrder) {
+        setActiveOrder(orderData.activeOrder as any);
+        setActiveOrderLenght(orderData?.activeOrder.lines.length)
+    } 
+
     const toggleNav = () => {
         setToggleMenu(!toggleMenu);
     };
@@ -81,14 +95,14 @@ const Navbar = () => {
                             Te ayudamos
                         </Button>
                     </Link>
-                    <Link href="/contacto">
+                    <Link href="/tienda/resumen-de-compra">
                         <Button variant="default" className="bg-second rounded-lg flex items-center space-x-2 hover:bg-second/80 transition duration-200">
                             <ShoppingCart
                                 fill="white"
                                 size={20}
                                 color="white"
                             />
-                            <span className="text-white">4</span>
+                            <span className="text-white">{activeOrderLenght}</span>
                         </Button>
                     </Link>
                 </div>

@@ -4,6 +4,7 @@ import { formatCurrency} from "@/lib/utils";
 import { AddItemToOrder } from "@/queries/add-item-to-cart.mutation";
 import axios from "axios";
 import { error } from "console";
+import { redirect } from "next/navigation";
 
 interface SelectedOptions {
     [key: string]: { optionName: string; optionPrice: number } | null;
@@ -32,7 +33,8 @@ const DetailedOrderList:React.FC<Props> = ({selectedOptions, groupNames, product
 
     const handleAddItemToOrder = async () => {
       try {
-        const response = await axios.post('/api/addItemToCart', {totalPrice: totalPrice, variantId: variantId[0], quantity: 1   });
+        const response = await axios.post('/api/addItemToCart', {totalPrice: totalPrice, variantId: variantId[0], quantity: 1 });
+        redirect("/tienda/resumen-de-compra")
       } catch (error) {
         console.error("An error occurred: ", error)
       }

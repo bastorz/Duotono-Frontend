@@ -1,26 +1,26 @@
 const productRoutes = [
     {
-        href: "/tienda/productos/papeleria-y-oficina",
+        href: "/tienda/categorias/papeleria-y-oficina",
         label: "Papelería y oficina",
     },
     {
-        href: "/tienda/productos/publicidad-y-exterior",
+        href: "/tienda/categorias/publicidad-y-exterior",
         label: "Publicidad y exterior",
     },
     {
-        href: "/tienda/productos/ropa-y-accesorios",
+        href: "/tienda/categorias/ropa-y-accesorios",
         label: "Ropa y accesorios",
     },
     {
-        href: "/tienda/productos/decoracion-y-regalos",
+        href: "/tienda/categorias/decoracion-y-regalos",
         label: "Decoración y regalos",
     },
     {
-        href: "/tienda/productos/empaques-y-presentacion",
+        href: "/tienda/categorias/empaques-y-presentacion",
         label: "Empaques y presentación",
     },
     {
-        href: "/tienda/productos/grandes-formatos",
+        href: "/tienda/categorias/grandes-formatos",
         label: "Grandes formatos",
     },
   ]

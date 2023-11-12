@@ -1,5 +1,5 @@
 import { DocumentNode } from 'graphql';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface QueryResult<T> {
   data: T | null;
@@ -69,24 +69,26 @@ export function useQuery<T>(
   variables: Record<string, any> = {},
   deps: any[] = []
 ): QueryResult<T> {
-  const [data, setData] = React.useState<T | null>(null);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<any>(null);
+  const [data, setData] = useState<T | null>(
+null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<any>(null);
 
-  React.useEffect(() => {
-    query(document, variables)
-      .then((result) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const result = await query(document, variables);
         setData(result.data as T);
         setError(null);
-      })
-      .catch((err) => {
-        setError(err.message);
+      } catch (err) {
+        setError(err);
         setData(null);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
-  }, deps);
-
+      }
+    };
+    fetchData();
+  }, [...deps, document, JSON.stringify(variables)]); // Include the dependencies here
   return { data, loading, error };
 }
