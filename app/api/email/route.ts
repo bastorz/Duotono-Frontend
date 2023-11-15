@@ -26,7 +26,7 @@ export async function POST(req: Request) {
   const formDataEntryValues = Array.from(formData.values());
   for (const formDataEntryValue of formDataEntryValues) {
     if (typeof formDataEntryValue === "object" && "arrayBuffer" in formDataEntryValue) {
-      const file = formDataEntryValue as unknown as Blob;
+      const file = formDataEntryValue as unknown as Blob
       const buffer = Buffer.from(await file.arrayBuffer());
 
       const mailOptions: Mail.Options = {
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         to: process.env.MY_EMAIL,
         // cc: email, (uncomment this line if you want to send a copy to the sender)
         subject: `Formulario de Duotono.es`,
-        html: `<h1>Mensaje de: ${name}</h1></br><p>${lastName}</p></br>${email}</br></br>${phone}</br></br>${company}</br></br>${alreadyBought}</br></br>${selectedOption}</br></br>${message}</br>`,
+        html: `<h4>Mensaje de: ${name} ${lastName}</h4></br></br><p>Email: ${email}</p></br></br><p>Teléfono: ${phone}</p></br></br><p>Empresa: ${company}</p></br></br><p>Ha comprado ya en la tienda? ${alreadyBought}</p></br></br><p>Tipo de producto que necesita: ${selectedOption}</p></br></br><p>${message}</p></br>`,
         attachments: [
           {
             filename: "image.png",

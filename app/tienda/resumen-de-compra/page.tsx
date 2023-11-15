@@ -137,7 +137,7 @@ export default function Prueba() {
       await addBillingAddress()
       await transitionOrderToArrangingPayment()
       await checkClientSecret()
-      setClientSecretUpdated(true)
+      await setClientSecretUpdated(true)
       setIsLoading(false)
   }
 
@@ -160,23 +160,32 @@ export default function Prueba() {
     }
   };
   
-  const handleBizumContainerClick = () => {
-    if (!selectedBizum) {
-      setSelectedBizum(true);
-      setSelectedStripe(false); // Deselect Stripe
-      setSelectedPaymentMethod("bizum");
-    } else {
-      setSelectedBizum(false);
-      setSelectedPaymentMethod("null"); // Reset payment method
-    }
-  };
+  // const handleBizumContainerClick = () => {
+  //   if (!selectedBizum) {
+  //     setSelectedBizum(true);
+  //     setSelectedStripe(false); // Deselect Stripe
+  //     setSelectedPaymentMethod("bizum");
+  //   } else {
+  //     setSelectedBizum(false);
+  //     setSelectedPaymentMethod("null"); // Reset payment method
+  //   }
+  // };
 
-  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedShippingMethod === undefined || selectedShippingMethod === "Selecciona una opción") {
       toast.error("Selecciona un método de envío.")
     } else {
+      setIsLoading(true)
       setSuccessConfiguration(true)
+      await addShippingMethod()
+      await addUserData()
+      await addShippingAddress()
+      await addBillingAddress()
+      await transitionOrderToArrangingPayment()
+      await checkClientSecret()
+      await setClientSecretUpdated(true)
+      setIsLoading(false)
       toast.success("Datos de envío guardados correctamente.")
     }
   };
@@ -197,6 +206,9 @@ export default function Prueba() {
   )
   
   if (error) return <p>Error : {error.message}</p>;
+
+  console.log("clientSecret", clientSecret)
+  console.log("clientSecretUpdated", clientSecretUpdated)
 
   return (
     <div className='px-10 md:px-20 xl:px-32 py-20'>
@@ -368,12 +380,12 @@ export default function Prueba() {
                   >
                     <option>Selecciona una opción</option>
                     {eligibleShippingMethodsData?.eligibleShippingMethods.map((method) => (
-                          <option 
-                            key={method.id}
-                            value={method.id}
-                            >
-                              {method.name} - {formatCurrency(method.price)}
-                          </option>
+                      <option 
+                        key={method.id}
+                        value={method.id}
+                         >
+                          {method.name} - {formatCurrency(method.price)}
+                      </option>
                     ))}
                 </select>
                 </div>
@@ -422,7 +434,13 @@ export default function Prueba() {
                   />
                 </div>
                 <Button type='submit' className={cn("bg-main gap-x-4 text-black bg-first mt-8 font-semibold col-span-2 xl:col-span-1")}>
-                   Guardar datos de envío
+                  {isLoading ? (
+                        <div className='h-screen flex items-center justify-center'>
+                        <div className="animate-spin rounded-full border-t-4 border-black h-4 w-4"></div>
+                    </div>
+                  ) : (
+                    <p>Guardar datos de envío</p>
+                  )}
                 </Button>
               </form>
             </div>
@@ -430,7 +448,7 @@ export default function Prueba() {
           <div className='py-0 xl:py-10'>
             <h5 className='font-bold text-3xl xl:text-4xl pb-10'>Selecciona el método de pago</h5>
             <div
-              className={cn('px-8 py-10 m-4 cursor-pointer border border-black/40 rounded-md flex flex-col xl:flex-row items-center justify-between space-y-4 xl:space-y-0 xl:space-x-10', selectedStripe ? 'bg-blue-500/5 border-blue-400' : 'bg-white')}
+              className={cn('px-8 py-10 m-4 cursor-pointer border border-black/40 rounded-md flex flex-col xl:flex-row items-center justify-between space-y-4 xl:space-y-0 xl:space-x-10', selectedStripe ? 'bg-black-500/5 border-black' : 'bg-white')}
               onClick={!selectedStripe ? handleStripeContainerClick : undefined}
             >
               <div className='flex space-x-4 items-center '>
@@ -442,7 +460,7 @@ export default function Prueba() {
                   {selectedStripe && (
                     <Dialog>
                       <DialogTrigger >
-                      <Button variant="default" className={cn("bg-main gap-x-4 w-64 xl:w-80 text-black bg-first")} onClick={updateOrderState}>
+                      <Button variant="default" className={cn("bg-main gap-x-4 w-64 xl:w-80 text-black bg-first")} >
                         <ShoppingCart />
                         <p className="text-[12px] xl:text-[16px]">Pagar a través de Stripe</p>
                         <ArrowRight />
@@ -451,7 +469,7 @@ export default function Prueba() {
                       <DialogContent>
                           {isLoading ? (
                             <div className="flex items-center justify-center h-[300px]">
-                              <div className="animate-spin rounded-full border-t-4 border-blue-500 border-t-blue-500 h-16 w-16"></div>
+                              <div className="animate-spin rounded-full border-t-4 border-black-500 border-t-blue-500 h-8 w-8"></div>
                             </div> ) :
                            (
                             <DialogHeader>

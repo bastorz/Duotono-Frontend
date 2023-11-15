@@ -318,10 +318,15 @@ query getCollectionsBySlug($slug: String!) {
     }
     productVariants {
       items {
+        name
         product {
           name
-        	slug
+          slug
           description
+          customFields {
+            PrecioBase
+            Precio1000Unidades
+          }
           featuredAsset {
             preview
           }

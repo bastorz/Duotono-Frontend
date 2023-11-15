@@ -61,7 +61,6 @@ const ProductosPrueba = ({params}: {params: {slug: string}}) => {
     if (matchingVariant) {
       setVariantId(matchingVariant.id);
       setSelectedVariant(true)
-      console.log("matchingVariant", matchingVariant.id);
     } else {
       console.log('No matching variant found.');
     }
@@ -149,28 +148,32 @@ const ProductosPrueba = ({params}: {params: {slug: string}}) => {
   if (error) return <p>Error : {error.message}</p>;
 
   return (
-      <div className='xl:px-20 py-20 flex flex-col space-y-4'>
-        <div className=" py-4">
+      <div className='xl:px-10 py-20 flex flex-col space-y-4'>
+        <div className="py-4">
           <ul className='flex space-x-4'>
-            <li className='flex space-x-4 items-center'>
-              <Home/>
-              <p className='text-lg font-semibold'>Home</p>
-              <ChevronRight/>
-            </li>
-            <li className='flex space-x-4 items-center'>
-            <p className='text-lg font-semibold'>Tienda</p>
-              <ChevronRight/>
-            </li>
+            <Link href="/">
+              <li className='flex space-x-4 items-center'>
+                <Home/>
+                <p className='text-lg font-semibold'>Home</p>
+                <ChevronRight/>
+              </li>
+            </Link>
+            <Link href="/tienda">
+              <li className='flex space-x-4 items-center'>
+              <p className='text-lg font-semibold'>Tienda</p>
+                <ChevronRight/>
+              </li>
+            </Link>
             <li>
             <p className='text-lg font-bold'>{productData?.product.name}</p>
             </li>
           </ul>
         </div>
-        <div className="flex flex-col xl:flex-row w-full xl:bg-black mb-10">
+        <div className="flex flex-col xl:flex-row xl:bg-black mb-10">
               {productData?.product?.featuredAsset?.preview && (
-                <Image src={productData.product.featuredAsset.preview} alt="Product Preview" width={600} height={600} className='bg-white object-center w-full'/>
+                <Image src={productData.product.featuredAsset.preview} alt="Product Preview" width={600} height={600} className='bg-white object-center'/>
               )}
-                <div className="xl:h-[500px] bg-black w-full space-y-4 flex flex-col p-10">
+                <div className="xl:h-[500px] bg-black space-y-4 flex flex-col p-4 xl:p-10">
                   <p className="text-white font-semibold text-lg">{productData?.product.name}</p>
                   <p className="text-white max-w-xl">{removeHTMLTags(productData?.product.description)}</p>
                   {productData?.product.variants[0].price && (
@@ -182,16 +185,20 @@ const ProductosPrueba = ({params}: {params: {slug: string}}) => {
                     designRules={removeHTMLTags(productData?.product.customFields.Normas_De_Diseno)} 
                     orderProcess={removeHTMLTags(productData?.product.customFields.Proceso_De_Pedido)}
                   />
-                  <Link href="#selectOptions" className="flex gap-x-4">
-                      <Button variant="default" className={cn("bg-main gap-x-4 w-60 text-black bg-first")}>
-                        <ShoppingCart />
-                        <p className="text-[16px]">Añadir al carrito</p>
-                        <ArrowRight />
-                      </Button>
-                      <Button variant="ghost" className="gap-x-4 border border-white hover:bg-white group">
-                      <p className="text-[16px] text-white group-hover:text-black">Ver formatos</p>
-                      </Button>
-                  </Link>
+                  <div className='flex space-x-10'>
+                      <Link href="#selectOptions" className="flex gap-x-4">
+                        <Button variant="default" className={cn("bg-main gap-x-4 w-60 text-black bg-first")}>
+                          <ShoppingCart />
+                            <p className="text-[16px]">Añadir al carrito</p>
+                          <ArrowRight />
+                        </Button>
+                      </Link>
+                      <Link href="/formatos" target='_blank'>
+                        <Button variant="ghost" className="gap-x-4 border border-white py-4">
+                          <p className="text-[16px] text-white ">Ver formatos</p>
+                        </Button>
+                      </Link>
+                  </div>
                 </div>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-6 gap-y-10 xl:gap-y-0 py-10 px-4 xl:px-0" id='selectOptions'>

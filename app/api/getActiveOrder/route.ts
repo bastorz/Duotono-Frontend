@@ -4,7 +4,6 @@ import { GET_ACTIVE_ORDER } from "@/queries/get-active-order";
 export async function GET() {
     try {
       const data = await fetchActiveOrder();
-      console.log("holaaa", data);
       return Response.json(data);
     } catch (error) {
       console.error(error);

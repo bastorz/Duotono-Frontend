@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import { BookCheck, Check, UserSquare } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 const Page = () => {
 
@@ -14,9 +16,11 @@ const Page = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [company, setCompany] = useState('');
+  const [message, setMessage] = useState('');
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState<File[]>([]);
+
+  const router = useRouter()
 
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -29,19 +33,26 @@ const Page = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
-    images.forEach((image, i) => {
-      formData.append(image.name, image);
-    });
-    formData.append("name", name)
-    formData.append("lastName", lastName)
-    formData.append("email", email)
-    formData.append("phone", phone)
-    formData.append("company", company)
-    setUploading(true);
-    await axios.post("/api/email", formData);
-    setUploading(false);
+    try {
+      formData.append("name", name)
+      formData.append("lastName", lastName)
+      formData.append("email", email)
+      formData.append("phone", phone)
+      formData.append("message", message)
+      images.forEach((image, index) => {
+        formData.append(`images[${index}]`, image);
+      });
+      setUploading(true);
+      await axios.post("/api/dropbox", formData);
+      setUploading(false);
+      toast.success("Documento enviado correctamente.")
+      router.push("/tienda/checkout/compra-realizada")
+    } catch (error) {
+      toast.error("No se puede enviar el formulario.")
+      setUploading(false);
+    }
+
   };
-  
   return (
     <div className="flex flex-col items-center justify-center py-20 space-y-20">
       <div className="flex items-center justify-center">
@@ -57,9 +68,8 @@ const Page = () => {
           <BookCheck className="w-12 h-12 p-2"/>
         </span>
       </div>
-      <form className="bg-first w-full xl:max-w-[38rem] p-10 rounded-xl" onSubmit={handleSubmit}>
+      <form className="w-full xl:max-w-[38rem] p-10 rounded-xl border-x border-b shadow-lg" onSubmit={handleSubmit}>
         <div className="flex flex-col space-y-4">
-        <div className="flex flex-col xl:flex-row xl:space-x-4 space-y-4 xl:space-y-0">
           <div className="flex flex-col space-y-2">
             <label className="font-bold">Nombre</label>
             <input
@@ -82,7 +92,6 @@ const Page = () => {
               className="w-full xl:max-w-[40rem] p-4 rounded-md"
             />
           </div>
-        </div>
         <div className="flex flex-col space-y-4 xl:space-y-0">
           <label className="font-bold">Email</label>
           <input
@@ -95,20 +104,31 @@ const Page = () => {
           />
         </div>
         <div className="flex flex-col xl:flex-row xl:space-x-4 space-y-4 xl:space-y-0">
-          <div className="flex flex-col space-y-2">
-            <label className="font-bold">Phone</label>
+          <div className="flex flex-col space-y-2 w-full">
+            <label className="font-bold">Teléfono</label>
             <input
               type="text"
               required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="633 333 333"
-              className="w-full xl:max-w-[18rem] p-4 rounded-md"
+              className="w-full p-4 rounded-md"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col xl:flex-row xl:space-x-4 space-y-4 xl:space-y-0 ">
+          <div className="flex flex-col space-y-2 w-full">
+            <label className="font-bold">Mensaje</label>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Escribe tu mensaje..."
+              className="p-4 rounded-md"
             />
           </div>
         </div>
         <div className="flex flex-col space-y-4 xl:space-y-0">
-            <span className="font-bold">Subir archivos (Opcional)</span>
+            <span className="font-bold py-4">Subir archivos (Opcional)</span>
             <CustomFileSelector
               accept="image/png, image/jpeg"
               onChange={handleFileSelected}
@@ -119,13 +139,17 @@ const Page = () => {
             type="submit"
             variant="default"
             className={cn({
-              "text-white bg-black hover:bg-black/90 duration-200 transition":
+              "text-white bg-blackduration-200 transition":
                 true,
               "disabled pointer-events-none opacity-90": uploading,
             })}
             disabled={uploading}
           >
-            Enviar
+            {uploading ? (
+              <div className='h-screen flex items-center justify-center'>
+                <div className="animate-spin rounded-full border-t-4 border-white h-4 w-4"></div>
+              </div>
+            ) : <p>Enviar</p>}
           </Button>
         </div>
       </form>

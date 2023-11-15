@@ -149,6 +149,23 @@ export interface Collection {
     name: string
     slug: string
     description: string
+    productVariants: {
+      items: [{
+        name: string,
+        product: {
+          name: string
+          slug: string,
+          description: string,
+          featuredAsset: {
+            preview: string
+          }
+          customFields: {
+            PrecioBase: number,
+            Precio1000Unidades: number
+          }
+        }
+      }]
+    }
     children: [{
       name: string
       id: string,

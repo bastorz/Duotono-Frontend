@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const CategoryBanner = () => {
     return (
@@ -11,10 +12,12 @@ const CategoryBanner = () => {
                 <h3 className="font-bold text-5xl xl:text-4xl max-w-2xl text-center xl:text-left">Diseño de Packaging: Deja Huella en Cada Producto</h3>
                 <p className="text-black max-w-[600px] text-center xl:text-left">Transformamos envases en experiencias. Captura la atención y el corazón de tus clientes.</p>
                 <div className="flex flex-col xl:flex-row items-center justify-center xl:justify-start xl:space-x-6 space-y-6 xl:space-y-0 pb-10 xl:pb-0">
-                    <Button variant="default" className="bg-black hover:bg-black rounded-xl gap-x-2 shrink-0 text-xs xl:text-base p-8 text-white">
-                        Contactar
-                    </Button>
-                    <Button variant="ghost" className="bg-white rounded-xl hover:bg-fourth transition duration-200 py-[30px] px-12 text-base">Ver mas productos</Button>
+                    <Link href="/contacto" target="_blank">
+                        <Button variant="default" className="bg-black rounded-xl gap-x-2 shrink-0 text-xs xl:text-base text-white">
+                            Contactar
+                        </Button>
+                    </Link>
+                    <Link href="/tienda" target="_blank"><Button variant="ghost" className="bg-white rounded-xl text-base">Ver mas productos</Button></Link>
                 </div>
             </div>
         </div>

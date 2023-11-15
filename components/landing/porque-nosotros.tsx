@@ -1,6 +1,7 @@
 import {ArrowRight, BadgeCheck} from "lucide-react"
 import Image from "next/image"
 import { Button } from "../ui/button"
+import Link from "next/link"
 
 const PorqueNosotros = () => {
     return (
@@ -24,10 +25,12 @@ const PorqueNosotros = () => {
                 <p className="text-white max-w-lg text-center xl:text-left">Duotono ofrece soluciones personalizadas: Cada proyecto es único, y nuestra tecnología permite adaptaciones específicas para cada cliente.</p>
             </div>
             <div className="flex items-center justify-center xl:justify-start space-x-6 w-full">
-                <Button variant="default" className="bg-first rounded-xl gap-x-2 shrink-0 text-xs xl:text-base hover:bg-first/80 transition duration-200">
-                    Ver productos 
-                    <ArrowRight className="w-4 xl:w-6"/>
-                </Button>
+                <Link href="/tienda">
+                    <Button variant="default" className="bg-first rounded-xl gap-x-2 shrink-0 text-xs xl:text-base ">
+                        Ver productos 
+                        <ArrowRight className="w-4 xl:w-6"/>
+                    </Button>
+                </Link>
             </div>
         </div>
     </div>

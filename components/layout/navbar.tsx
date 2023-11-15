@@ -91,12 +91,12 @@ const Navbar = () => {
                 </div>  
                 <div className="flex items-center gap-x-10">
                     <Link href="/contacto">
-                        <Button variant="default" className="bg-first rounded-lg hover:bg-first/80 transition duration-200">
+                        <Button variant="default" className="bg-first rounded-lg ">
                             Te ayudamos
                         </Button>
                     </Link>
                     <Link href="/tienda/resumen-de-compra">
-                        <Button variant="default" className="bg-second rounded-lg flex items-center space-x-2 hover:bg-second/80 transition duration-200">
+                        <Button variant="default" className="bg-second rounded-lg flex items-center space-x-2 ">
                             <ShoppingCart
                                 fill="white"
                                 size={20}

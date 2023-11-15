@@ -7,8 +7,9 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "../ui/button";
 import CustomFileSelector from "./utils/custom-file-selector";
 import ImagePreview from "./utils/image-preview";
+import toast from "react-hot-toast";
 
-const options = ['Papelería y oficina', 'Publicidad y exterior', 'Ropa y accesorios', 'Decoración y regalos', 'Empaques y presentación', 'Grandes formatos']
+const options = ['Seleccionar una opción', 'Papelería y oficina', 'Publicidad y exterior', 'Ropa y accesorios', 'Decoración y regalos', 'Empaques y presentación', 'Grandes formatos']
 
 const FileUploadForm = () => {
   const [name, setName] = useState('');
@@ -41,22 +42,25 @@ const FileUploadForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    images.forEach((image, i) => {
-      formData.append(image.name, image);
-    });
-    formData.append("name", name)
-    formData.append("lastName", lastName)
-    formData.append("email", email)
-    formData.append("phone", phone)
-    formData.append("company", company)
-    formData.append("alreadyBought", alreadyBought)
-    formData.append("selectedOption", selectedOption)
-    formData.append("message", message)
-    setUploading(true);
-    await axios.post("/api/email", formData);
-    setUploading(false);
+    if (selectedOption === 'Seleccionar una opción') {
+      toast.error("Debes seleccionar un tipo de producto válido")
+    } else {
+      const formData = new FormData();
+      images.forEach((image, i) => {
+        formData.append(image.name, image);
+      });
+      formData.append("name", name)
+      formData.append("lastName", lastName)
+      formData.append("email", email)
+      formData.append("phone", phone)
+      formData.append("company", company)
+      formData.append("alreadyBought", alreadyBought)
+      formData.append("selectedOption", selectedOption)
+      formData.append("message", message)
+      setUploading(true);
+      await axios.post("/api/email", formData);
+      setUploading(false);
+    }
   };
   return (
 
@@ -198,13 +202,17 @@ const FileUploadForm = () => {
             type="submit"
             variant="default"
             className={classNames({
-              "text-white bg-black hover:bg-black/90 duration-200 transition":
+              "text-white bg-black duration-200 transition":
                 true,
               "disabled pointer-events-none opacity-90": uploading,
             })}
             disabled={uploading}
           >
-            Enviar
+            {uploading ? (
+              <div className='h-screen flex items-center justify-center'>
+                <div className="animate-spin rounded-full border-t-4 border-white h-4 w-4"></div>
+              </div>
+            ) : <p>Enviar</p>}
           </Button>
         </div>
       </form>

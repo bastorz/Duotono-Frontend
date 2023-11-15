@@ -24,26 +24,22 @@ export const ProductDetailedTabs:React.FC<Props> = ({
         </TabsList>
         <TabsContent value="description" className="py-2 space-y-2 pt-6">
           <div className="flex items-center space-x-2 text-white">
-            <Circle className="h-3 w-3" fill="white"/>
-            <p>{description}</p>
+            <p className="max-w-2xl">{description}</p>
           </div>
         </TabsContent>
         <TabsContent value="product" className="py-2 space-y-2 pt-6">
         <div className="flex items-center space-x-2 text-white">
-            <Circle className="h-3 w-3" fill="white"/>
-            <p>{specifications}</p>
+            <p className="max-w-2xl">{specifications}</p>
           </div>
         </TabsContent>
         <TabsContent value="design" className="py-2 space-y-2 pt-6">
         <div className="flex items-center space-x-2 text-white">
-            <Circle className="h-3 w-3" fill="white"/>
-            <p>{orderProcess}</p>
+            <p className="max-w-2xl">{orderProcess}</p>
           </div>
         </TabsContent>
         <TabsContent value="order" className="py-2 space-y-2 pt-6">
         <div className="flex items-center space-x-2 text-white">
-            <Circle className="h-3 w-3" fill="white"/>
-            <p>{designRules}</p>
+            <p className="max-w-2xl">{designRules}</p>
           </div>
         </TabsContent>
       </Tabs>
