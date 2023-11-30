@@ -42,7 +42,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     const buffer = Buffer.from(await bloby.arrayBuffer())
 
     // Initialize Dropbox API
-    const dropbox = new Dropbox({ accessToken: 'sl.Bp4UAPySBokZPZmrNGGeujcO5iVnPbfMWhfw17ZXMGaa8czO3x39_1XTk2O6qk6LrQDGbMHNEyKKfn1HxgyJHa8G8kS7qsz4_6Fli8GfA8-_MA9AMyA7USX-UiMbZtdcWT7We5sTTmXeqthn-NptM6I' });
+    const dropbox = new Dropbox({ accessToken: 'sl.Bp4AzjXiC0Z8msMxjdpS5WdoocuIjz7Fa-Ynpi2MrQadxFZpXdTmmxB9Jf-bccbEhco_AgSFwt15TcBA0BtjSBmzI3yT52F_qbcqD7FEsJwc7brKM0BSjCYBezUCpiOkwLe_XmiDfjn6cjgsonnNjfE' });
   
     // Create a folder in Dropbox
     const folderPath = `/${name + ' ' + lastName}`;

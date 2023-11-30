@@ -59,6 +59,7 @@ const FileUploadForm = () => {
       formData.append("message", message)
       setUploading(true);
       await axios.post("/api/email", formData);
+      toast.success("Formulario enviado correctamente")
       setUploading(false);
     }
   };

@@ -137,9 +137,8 @@ const Page = () => {
         </div>
           <Button
             type="submit"
-            variant="default"
             className={cn({
-              "text-white bg-blackduration-200 transition":
+              " bg-black bg-blackduration-200 transition bg-black text-first-foreground px-12":
                 true,
               "disabled pointer-events-none opacity-90": uploading,
             })}
@@ -149,7 +148,7 @@ const Page = () => {
               <div className='h-screen flex items-center justify-center'>
                 <div className="animate-spin rounded-full border-t-4 border-white h-4 w-4"></div>
               </div>
-            ) : <p>Enviar</p>}
+            ) : <p className="text-white">Enviar</p>}
           </Button>
         </div>
       </form>
