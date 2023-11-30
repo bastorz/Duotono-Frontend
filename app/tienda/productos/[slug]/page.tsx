@@ -234,8 +234,8 @@ const ProductosPrueba = ({params}: {params: {slug: string}}) => {
           </div>
           <div className="border border-black/20 col-span-2 rounded-xl p-10">
               <h5 className="font-bold text-2xl">Resumen del producto</h5>
-              {productData?.product.optionGroups.map((option) => (
-                  <div className="grid grid-cols-1 py-6 gap-y-10">
+              {productData?.product.optionGroups.map((option, i) => (
+                  <div className="grid grid-cols-1 py-6 gap-y-10" key={i}>
                       <div>
                           <button onClick={() => clearSelectedOptions(option.name)} className="w-full text-end text-lg">Cambiar</button>
                           <h6 className="text-black/70 text-xl pb-2">{option.name}</h6>

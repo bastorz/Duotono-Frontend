@@ -43,8 +43,8 @@ const DetailedOrderList:React.FC<Props> = ({selectedOptions, groupNames, product
     return (
         <div className="border border-black/20 col-span-2 rounded-xl p-10">
             <h5 className="font-bold text-2xl">Resumen del producto</h5>
-            {groupNames.map((groupName) => (
-                <div className="grid grid-cols-1 py-6 gap-y-10">
+            {groupNames.map((groupName, i) => (
+                <div className="grid grid-cols-1 py-6 gap-y-10" key={i}>
                     <div>
                         <button onClick={() => clearSelectedOptions(groupName)} className="w-full text-end text-lg">Cambiar</button>
                         <h6 className="text-black/70 text-xl pb-2">{groupName}</h6>

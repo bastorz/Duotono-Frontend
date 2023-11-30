@@ -7,8 +7,8 @@ import Link from "next/link"
 const Format = () => {
     return (
         <div className="px-10 xl:px-32 xl:py-10">
-        {formats.map((format) => (
-        <div className="pb-10">
+        {formats.map((format, i) => (
+        <div className="pb-10" key={i}>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-y-4 pb-10 text-center xl:text-left" key={format.name}>
                 <h5 className="font-bold text-2xl">{format.item.title}</h5>
                 <div></div>

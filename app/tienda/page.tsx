@@ -30,8 +30,8 @@ const Page = () => {
             <div className="xl:px-32 py-20 px-8 flex flex-col space-y-10">
                 <h3 className="text-4xl font-bold">Tienda</h3>
                 <div className="space-y-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20">
-                    {collectionsData?.collections.items.map((collection) => (
-                        <div className="flex flex-col space-y-8 ">
+                    {collectionsData?.collections.items.map((collection, i) => (
+                        <div className="flex flex-col space-y-8 " key={i}>
                             <h3 className="font-bold text-2xl">{collection.name}</h3>
                             <Link href={`/tienda/categorias/${collection.slug}`} className="relative group">
                                 <Image src={collection.featuredAsset.preview} alt="" width={600} height={600} className="object-center max-w-[300px] transition-transform transform-gpu duration-300 group-hover:scale-110"/>

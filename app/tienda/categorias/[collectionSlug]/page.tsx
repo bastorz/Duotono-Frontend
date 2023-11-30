@@ -53,8 +53,8 @@ const Page = ({params}: {params: {collectionSlug: string}}) => {
           <h3 className="text-4xl font-bold">{collectionsData?.collection.name}</h3>
           <p className="text-lg max-w-[20rem] xl:max-w-[50rem]">{removeHTMLTags(collectionsData?.collection.description)}</p>
           <div className="space-y-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-20 place-items-center">
-              {collectionsData?.collection.children.map((subcategory) => (
-                  <div className="flex flex-col h-full justify-between py-10">
+              {collectionsData?.collection.children.map((subcategory, i) => (
+                  <div className="flex flex-col h-full justify-between py-10" key={i}>
                       <Link href={`/tienda/categorias/${subcategory.slug}`} className="min-h-[300px] relative group">
                         <Image src={subcategory.featuredAsset.preview} alt="" width={600} height={600} className="object-center max-w-[300px] transition-transform transform-gpu duration-300 group-hover:scale-110"/>
                         <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 ">

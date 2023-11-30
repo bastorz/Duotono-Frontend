@@ -262,8 +262,8 @@ export default function Prueba() {
                             </div>
                         </div>
                         <div className='py-4'>
-                          {line.productVariant.options.map((option) => (
-                            <div className='flex space-x-4 py-1 items-center'>
+                          {line.productVariant.options.map((option, i) => (
+                            <div className='flex space-x-4 py-1 items-center' key={i}>
                               <div className='font-bold'>{option.code}:</div>
                               <div className=''>{option.name}</div>
                             </div>
@@ -278,8 +278,8 @@ export default function Prueba() {
               <div className='flex flex-col space-y-4 xl:w-max'>
                 <div className='xl:col-span-2 bg-black rounded-xl p-4 xl:p-8'>
                     <h4 className='font-semibold text-2xl text-white mb-4'>Resumen</h4>
-                    {activeOrder.lines.map((line) => (
-                     <div className='flex items-center justify-between py-2 xl:py-0 xl:space-x-10'>
+                    {activeOrder.lines.map((line, i) => (
+                     <div className='flex items-center justify-between py-2 xl:py-0 xl:space-x-10' key={i}>
                        <p className=' text-white/80'>{line.productVariant.name.length > 30 ? line.productVariant.name.substring(0, 30) + "..." : line.productVariant.name}</p>
                        <p className=' text-white/80'>{formatCurrency(line.linePriceWithTax)}</p>
                     </div>
