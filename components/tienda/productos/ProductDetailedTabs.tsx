@@ -17,7 +17,7 @@ export const ProductDetailedTabs:React.FC<Props> = ({
     return (
         <Tabs defaultValue="description" className="w-full py-2 hidden xl:flex flex-col">
         <TabsList className="flex space-x-4">
-          <TabsTrigger value="description" className="w-[250px]">Descripción</TabsTrigger>
+          <TabsTrigger value="description" className="w-[250px] ">Descripción</TabsTrigger>
           <TabsTrigger value="product" className="w-[250px]">Especificaciones del producto</TabsTrigger>
           <TabsTrigger value="design" className="w-[250px]">Normas de diseño</TabsTrigger>
           <TabsTrigger value="order" className="w-[250px]">Proceso de pedido</TabsTrigger>

@@ -4,6 +4,7 @@ import './globals.css'
 import { ToasterProvider } from '@/lib/toaster-provider'
 import { storyblokInit, apiPlugin } from "@storyblok/react/rsc";
 import StoryblokProvider from '@/components/storyblok/StoryblokProvider';
+import Whatsapp from '@/components/contacto/whatsapp';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
         <ToasterProvider/>
+        <Whatsapp/>
             {children}
         </body>
       </html>
