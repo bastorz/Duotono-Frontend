@@ -7,12 +7,13 @@ interface QueryResult<T> {
   error: any; // Replace 'any' with the appropriate type for your error
 }
 
-
 // If using bearer-token based session management, we'll store the token
 // in localStorage using this key.
 const AUTH_TOKEN_KEY = 'auth_token';
 
-const API_URL = 'http://localhost:3000/shop-api';
+const API_URL = process.env.NEXT_PUBLIC_VENDURE_URL
+  ? process.env.NEXT_PUBLIC_VENDURE_URL
+  : 'http://localhost:3000';
 
 let languageCode: string | undefined;
 let channelToken: string | undefined;
@@ -25,7 +26,10 @@ export function setChannelToken(value: string | undefined) {
   channelToken = value;
 }
 
-export function query(document: string | DocumentNode, variables: Record<string, any> = {}) {
+export function query(
+  document: string | DocumentNode,
+  variables: Record<string, any> = {}
+) {
   const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
   const headers = new Headers({
     'content-type': 'application/json',
@@ -69,8 +73,7 @@ export function useQuery<T>(
   variables: Record<string, any> = {},
   deps: any[] = []
 ): QueryResult<T> {
-  const [data, setData] = useState<T | null>(
-null);
+  const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
 
