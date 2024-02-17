@@ -11,9 +11,7 @@ interface QueryResult<T> {
 // in localStorage using this key.
 const AUTH_TOKEN_KEY = 'auth_token';
 
-const API_URL = process.env.NEXT_PUBLIC_VENDURE_URL
-  ? process.env.NEXT_PUBLIC_VENDURE_URL
-  : 'http://localhost:3000';
+const API_URL = 'https://panel.duotonodesign.com/shop-api';
 
 let languageCode: string | undefined;
 let channelToken: string | undefined;
