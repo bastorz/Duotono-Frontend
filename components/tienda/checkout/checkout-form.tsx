@@ -1,19 +1,23 @@
 // CheckoutForm.tsx
 import { Button } from '@/components/ui/button';
-import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
+import {
+  useStripe,
+  useElements,
+  PaymentElement,
+} from '@stripe/react-stripe-js';
 import { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const CheckoutForm = ({ orderCode }: { orderCode: string }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: FormEvent) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
-    setLoading(true)
+    setLoading(true);
 
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
@@ -37,25 +41,31 @@ const CheckoutForm = ({ orderCode }: { orderCode: string }) => {
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   const success = () => {
-    toast.success("Compra realizada correctamente")
-  }
+    toast.success('Compra realizada correctamente');
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <Button className='w-full mt-4 font-semibold' disabled={!stripe} onClick={success}>
+      <Button
+        className="w-full mt-4 font-semibold"
+        disabled={!stripe}
+        onClick={success}
+      >
         {loading ? (
-                <div className='h-screen flex items-center justify-center'>
-                <div className="animate-spin rounded-full border-t-4 border-black h-4 w-4"></div>
-            </div>
-        ) : <p>Realizar el pago</p>}
+          <div className="h-screen flex items-center justify-center">
+            <div className="animate-spin rounded-full border-t-4 border-black h-4 w-4"></div>
+          </div>
+        ) : (
+          <p>Realizar el pago</p>
+        )}
       </Button>
     </form>
   );
 };
 
-export default CheckoutForm
+export default CheckoutForm;
