@@ -249,7 +249,7 @@ export default function Prueba() {
         <div>
           <div className="grid grid-cols-1 xl:grid-cols-6 gap-x-10">
             {activeOrder.lines.length === 0 ? (
-              <div className="flex flex-col space-y-4 col-span-4">
+              <div className="flex flex-col space-y-4 col-span-4 py-4 md:py-0">
                 <p font-semibold pb-4 text-lg>
                   El carrito está vacío.
                 </p>
