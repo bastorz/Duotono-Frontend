@@ -85,17 +85,17 @@ const FileUploadForm = () => {
           proyecto. Nuestro equipo está listo para asesorarte y ayudarte.
         </p>
         <div className="flex flex-col items-center text-center xl:items-start xl:text-left space-y-4 pb-8">
-          <div className="flex space-x-4 pt-4">
+          <div className="flex flex-col items-center space-y-4 xl:flex-row xl:items-left xl:space-y-0 xl:space-x-4 pt-4">
             <Mail />
             <p className=" text-center xl:text-start">
               administracion@duotonodesign.com
             </p>
           </div>
-          <div className="flex space-x-4">
+          <div className="flex flex-col items-center space-y-4 xl:flex-row xl:items-left xl:space-y-0 xl:space-x-4">
             <Phone />
             <p className=" text-center xl:text-start">+34 922 024 033</p>
           </div>
-          <div className="flex space-x-4">
+          <div className="flex flex-col items-center space-y-4 xl:flex-row xl:items-left xl:space-y-0 xl:space-x-4">
             <MapPin />
             <p className="max-w-[10rem] text-center xl:text-start">
               Calle la Carreta 20, 38400 Santa Cruz de Tenerife

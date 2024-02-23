@@ -80,8 +80,46 @@ const Navbar = () => {
       </div>
 
       {toggleMenu && screenWidth < 1025 && (
-        <div className="flex items-center justify-evenly">
-          Menú desplegable // TODO
+        <div className="flex flex-col space-y-4 py-2 px-[17px]">
+          <Link
+            href="/servicios-de-diseno"
+            className={cn(
+              pathname === '/servicios-de-diseno'
+                ? 'text-black font-bold'
+                : 'text-black/80 font-bold'
+            )}
+          >
+            Nuestros servicios
+          </Link>
+          <Link
+            href="/quienes-somos"
+            className={cn(
+              pathname === '/quienes-somos'
+                ? 'text-black font-bold'
+                : 'text-black/80 font-bold'
+            )}
+          >
+            Quienes somos
+          </Link>
+          <Link
+            href="/contacto"
+            className={cn(
+              pathname === '/quienes-somos'
+                ? 'text-black font-bold'
+                : 'text-black/80 font-bold'
+            )}
+          >
+            Te ayudamos
+          </Link>
+          <Link href="/tienda/resumen-de-compra">
+            <Button
+              variant="default"
+              className="bg-second rounded-lg flex items-center space-x-2 "
+            >
+              <ShoppingCart fill="white" size={20} color="white" />
+              <span className="text-white">{activeOrderLenght}</span>
+            </Button>
+          </Link>
         </div>
       )}
 
