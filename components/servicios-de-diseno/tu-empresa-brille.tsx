@@ -26,7 +26,7 @@ const TuEmpresaBrille = () => {
           <Link href="/contacto" target="_blank">
             <Button
               variant="default"
-              className="bg-first rounded-xl gap-x-2 shrink-0 text-xs xl:text-base px-12"
+              className="bg-first rounded-xl gap-x-2 shrink-0 text-xs xl:text-base px-12 py-8"
             >
               Inicia tu rediseño
             </Button>
@@ -34,7 +34,7 @@ const TuEmpresaBrille = () => {
           <Link href="/sobre-nosotros" target="_blank">
             <Button
               variant="ghost"
-              className="rounded-xl border border-[#000000] px-12"
+              className="rounded-xl border border-[#000000] px-12 py-8"
             >
               Ver impresión
             </Button>

@@ -1,15 +1,11 @@
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  useJsApiLoader,
-} from '@react-google-maps/api';
+import { useJsApiLoader } from '@react-google-maps/api';
 import { useCallback, useEffect, useState } from 'react';
 
 const GoogleMaps = () => {
   const [screenWidth, setScreenWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 800
   );
+  const [mapSize, setMapSize] = useState('');
 
   useEffect(() => {
     const changeWidth = () => {
@@ -22,20 +18,10 @@ const GoogleMaps = () => {
     };
   }, []);
 
-  const desktopContainerStyle = {
-    width: '800px',
-    height: '400px',
-    borderRadius: '10px', // Adjust the radius based on your needs
-  };
-
-  const mobileContainerStyle = {
-    width: '375px',
-    height: '400px',
-    borderRadius: '10px', // Adjust the radius based on your needs
-  };
-
-  const containerStyle =
-    screenWidth > 1025 ? desktopContainerStyle : mobileContainerStyle;
+  useEffect(() => {
+    const containerStyle = screenWidth > 1025 ? '800' : '375';
+    setMapSize(containerStyle);
+  }, []);
 
   const center = {
     lat: 28.41759,
@@ -85,19 +71,13 @@ const GoogleMaps = () => {
         </div>
       </div>
       <div className="col-span-3">
-        {isLoaded ? (
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={zoom}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-          >
-            <Marker position={{ lat: 28.41759, lng: -16.54183 }} />
-          </GoogleMap>
-        ) : (
-          <></>
-        )}
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.634968399611!2d-16.55348752437481!3d28.400091275792494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc6a7f1336c4d10b%3A0x9f4c40e3078336d4!2sDuotono%20Design!5e0!3m2!1ses!2ses!4v1708656775282!5m2!1ses!2ses"
+          width={mapSize}
+          height="450"
+          className="border-0"
+          loading="lazy"
+        ></iframe>
       </div>
     </div>
   );

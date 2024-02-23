@@ -15,9 +15,9 @@ export async function POST(req: Request) {
   const selectedOption = formData.get('selectedOption');
   const message = formData.get('message');
 
-  let transport = nodemailer.createTransport('SMTP', {
+  const transport = nodemailer.createTransport({
     host: 'smtp.hostinger.com',
-    port: 462,
+    port: 465,
     secure: true,
     auth: {
       user: process.env.SMTP_EMAIL,

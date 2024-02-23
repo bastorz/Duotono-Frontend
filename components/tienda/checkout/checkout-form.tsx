@@ -44,18 +44,10 @@ const CheckoutForm = ({ orderCode }: { orderCode: string }) => {
     setLoading(false);
   };
 
-  const success = () => {
-    toast.success('Compra realizada correctamente');
-  };
-
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <Button
-        className="w-full mt-4 font-semibold"
-        disabled={!stripe}
-        onClick={success}
-      >
+      <Button className="w-full mt-4 font-semibold" disabled={!stripe}>
         {loading ? (
           <div className="h-screen flex items-center justify-center">
             <div className="animate-spin rounded-full border-t-4 border-black h-4 w-4"></div>

@@ -81,7 +81,7 @@ const Page = ({ params }: { params: { collectionSlug: string } }) => {
                   className="flex space-x-1 items-center  group"
                 >
                   <p className="font-bold text-lg">Ir a la sección</p>
-                  <ArrowRight className="w-8 h-8 group-hover:text-first duration-400 transition" />
+                  <ArrowRight className="w-8 h-8" />
                 </Link>
               </div>
             </div>

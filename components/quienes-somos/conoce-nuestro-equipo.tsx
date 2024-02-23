@@ -49,7 +49,7 @@ const ConoceNuestroEquipo = () => {
         </Link>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-4 place-items-center place-content-center gap-x-20 py-8 gap-y-10 xl:gap-y-0">
-        <div className="bg-[#AEAEAE]/10 flex flex-col items-center justify-center py-10 px-8 rounded-xl space-y-3">
+        <div className="flex flex-col items-center justify-center py-10 px-8 rounded-xl space-y-3">
           <Image
             src="/Maria-Francia.jpeg"
             alt="19"
@@ -64,19 +64,16 @@ const ConoceNuestroEquipo = () => {
             generar un impacto duradero.
           </p>
           <div className="flex space-x-4 pt-4">
-            {teamLogos.map((logo) => (
-              <Link
-                target="_blank"
-                key={logo.label}
-                href={logo.href}
-                className="w-5 h-5 rounded-xl flex items-center justify-center"
-              >
-                {logo.icon}
-              </Link>
-            ))}
+            <Image
+              src="/maria-francia-qr.jpeg"
+              alt="19"
+              width={70}
+              height={70}
+              className="w-18 h-18"
+            />
           </div>
         </div>
-        <div className="bg-[#AEAEAE]/10 flex flex-col items-center justify-center py-10 px-8 rounded-full space-y-3">
+        <div className="flex flex-col items-center justify-between py-10 px-8 rounded-full space-y-3">
           <Image
             src="/Elisabeth.jpeg"
             alt="19"
@@ -91,19 +88,16 @@ const ConoceNuestroEquipo = () => {
             impulsaremos hacia un futuro prometedor y lleno de éxitos.
           </p>
           <div className="flex space-x-4 pt-4">
-            {teamLogos.map((logo) => (
-              <Link
-                target="_blank"
-                key={logo.label}
-                href={logo.href}
-                className="w-5 h-5 rounded-xl flex items-center justify-center"
-              >
-                {logo.icon}
-              </Link>
-            ))}
+            <Image
+              src="/elizabeth-qr.jpeg"
+              alt="19"
+              width={70}
+              height={70}
+              className="w-18 h-18"
+            />
           </div>
         </div>
-        <div className="bg-[#AEAEAE]/10 flex flex-col items-center justify-center py-10 px-8 rounded-xl space-y-3">
+        <div className="flex flex-col items-center justify-center py-10 px-8 rounded-xl space-y-3">
           <Image
             src="/Carolina.jpeg"
             alt="19"
@@ -118,19 +112,16 @@ const ConoceNuestroEquipo = () => {
             excelencia, desde la conceptualización hasta la entrega final.
           </p>
           <div className="flex space-x-4 pt-4">
-            {teamLogos.map((logo) => (
-              <Link
-                target="_blank"
-                key={logo.label}
-                href={logo.href}
-                className="w-5 h-5 rounded-xl flex items-center justify-center"
-              >
-                {logo.icon}
-              </Link>
-            ))}
+            <Image
+              src="/carolina-qr.jpeg"
+              alt="19"
+              width={70}
+              height={70}
+              className="w-18 h-18"
+            />
           </div>
         </div>
-        <div className="bg-[#AEAEAE]/10 flex flex-col items-center justify-center py-10 px-8 rounded-xl space-y-3">
+        <div className="flex flex-col items-center justify-center py-10 px-8 rounded-xl space-y-3">
           <Image
             src="/Alejandra.jpeg"
             alt="19"
@@ -145,16 +136,13 @@ const ConoceNuestroEquipo = () => {
             productos debe ser un aspecto fundamental en todo lo que hacemos.
           </p>
           <div className="flex space-x-4 pt-4">
-            {teamLogos.map((logo) => (
-              <Link
-                target="_blank"
-                key={logo.label}
-                href={logo.href}
-                className="w-5 h-5 rounded-xl flex items-center justify-center"
-              >
-                {logo.icon}
-              </Link>
-            ))}
+            <Image
+              src="/alejandra-qr.jpeg"
+              alt="19"
+              width={70}
+              height={70}
+              className="w-18 h-18"
+            />
           </div>
         </div>
       </div>
