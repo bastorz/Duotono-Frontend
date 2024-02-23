@@ -1,88 +1,143 @@
-import Link from "next/link";
-import Image from 'next/image'
-import {Facebook, Twitter, Instagram, Linkedin, Youtube} from "lucide-react"
+import Link from 'next/link';
+import Image from 'next/image';
+import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 
 const Footer = () => {
+  const logos = [
+    {
+      label: 'Facebook',
+      icon: <Facebook fill="#000000" />,
+      href: 'https://www.facebook.com/duotonodesign2/',
+    },
 
-    const logos = [
-        {
-            label: "Facebook",
-            icon: <Facebook fill="#000000"/>,
-            href: "https://www.facebook.com/duotonodesign2/"
-        },
-        // {
-        //     label: "Twitter",
-        //     icon: <Twitter fill="#000000"/>,
-        //     href: "/"
-        // },
-        {
-            label: "Instagram",
-            icon: <Instagram />,
-            href: "https://www.instagram.com/duotonodesign/"
-        },
-        {
-            label: "Linkedin",
-            icon: <Linkedin fill="#000000"/>,
-            href: "https://www.linkedin.com/in/mar%C3%ADa-francia-dom%C3%ADnguez-rodr%C3%ADguez-a0ab16121/"
-        },
-        // {
-        //     label: "Youtube",
-        //     icon: <Youtube />,
-        //     href: "/"
-        // }
-    ]
+    {
+      label: 'Instagram',
+      icon: <Instagram />,
+      href: 'https://www.instagram.com/duotonodesign/',
+    },
+  ];
 
+  // Create a new Date object
+  const currentDate = new Date();
 
-    return (
-       <div className="w-full pt-20 pb-10 px-8 xl:px-20 bg-black">
-            <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-4 place-items-center xl:place-items-start">
-                <div className="flex flex-col gap-y-10">
-                    <Link href="/" className="">
-                        <h3 className="text-white text-4xl text-center xl:text-left">Duotono Design</h3>
-                    </Link>
-                    <p className="text-white xl:text-left text-lg text-center">¡Resalta con duotono! Expande tu marca gracias a la impresión digital.</p>
-                    <div className="flex space-x-3 items-center justify-center xl:justify-start">
-                        {logos.map((logo) => (
-                            <Link key={logo.label} href={logo.href} className="bg-first w-10 h-10 rounded-xl flex items-center justify-center">
-                                {logo.icon}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-                <div className="flex flex-col xl:items-start items-center space-y-2 ml-0 xl:ml-40 mt-10 mb-6 xl:my-0">
-                    <h4 className="text-white text-xl font-semibold mb-2 xl:mb-5">Productos</h4>
-                    <Link href="/tienda/categorias/papeleria-y-oficina" className="text-white">Papelería y oficina</Link>
-                    <Link href="/tienda/categorias/publicidad-y-exterior" className="text-white">Publicidad y exterior</Link>
-                    <Link href="/tienda/categorias/ropa-y-accesorios" className="text-white">Ropa y accesorios</Link>
-                    <Link href="/tienda/categorias/decoracion-y-regalos" className="text-white">Decoración y regalos</Link>
-                    <Link href="/tienda/categorias/empaques-y-presentacion" className="text-white">Empaques y presentación</Link>
-                    <Link href="/tienda/categorias/grandes-formatos" className="text-white">Grandes formatos</Link>
-                </div>
-                <div className="flex flex-col xl:items-start items-center space-y-2 ml-0 xl:ml-40 mt-10 mb-6 xl:my-0">
-                    <h4 className="text-white text-xl font-semibold mb-2 xl:mb-5">Nuestros servicios</h4>
-                    <Link href="/servicios-de-diseno" className="text-white">Impresión digital</Link>
-                    <Link href="/servicios-de-diseno" className="text-white">Branding</Link>
-                    <Link href="/servicios-de-diseno" className="text-white">Imagen corporativa</Link>
-                    <Link href="/servicios-de-diseno" className="text-white">Diseño redes sociales</Link>
-                </div>
-                <div className="flex flex-col xl:items-start items-center space-y-2 ml-0 xl:ml-40 mt-10 mb-6 xl:my-0">
-                    <h4 className="text-white text-xl font-semibold mb-2 xl:mb-5">Duotono</h4>
-                    <Link href="/quienes-somos" className="text-white">Sobre nosotros</Link>
-                    <Link href="/contacto" className="text-white">Contáctanos</Link>
-                    <Link href="https://www.google.com/maps?rlz=1C1UEAD_esES1071ES1071&gs_lcrp=EgZjaHJvbWUqCQgAECMYJxiKBTIJCAAQIxgnGIoFMg0IARAuGK8BGMcBGIAEMgYIAhBFGEEyBggDEEUYQTIGCAQQRRg8MgYIBRBFGEHSAQgyNTIwajBqN6gCALACAA&um=1&ie=UTF-8&fb=1&gl=es&sa=X&geocode=KQvRxDYTf2oMMdQ2gwfjQEyf&daddr=C.+la+Carreta,+20,+38400+Puerto+de+la+Cruz,+Santa+Cruz+de+Tenerife" className="text-white">Ubicación</Link>
-                </div>
-                {/* <div className="flex flex-col xl:items-start items-center space-y-2 ml-0 xl:ml-40 mt-10 mb-6 xl:my-0">
+  // Get the current year
+  const currentYear = currentDate.getFullYear();
+
+  return (
+    <div className="w-full pt-20 pb-10 px-8 xl:px-20 bg-black">
+      <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-4 place-items-center xl:place-items-start">
+        <div className="flex flex-col gap-y-10">
+          <Link href="/" className="">
+            <h3 className="text-white text-4xl text-center xl:text-left">
+              Duotono Design
+            </h3>
+          </Link>
+          <p className="text-white xl:text-left text-lg text-center">
+            ¡Resalta con Duotono! Expande tu marca gracias a la impresión
+            digital.
+          </p>
+          <div className="flex space-x-3 items-center justify-center xl:justify-start">
+            {logos.map((logo) => (
+              <Link
+                key={logo.label}
+                href={logo.href}
+                className="bg-first w-10 h-10 rounded-xl flex items-center justify-center"
+              >
+                {logo.icon}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col xl:items-start items-center space-y-2 ml-0 xl:ml-40 mt-10 mb-6 xl:my-0">
+          <h4 className="text-white text-xl font-semibold mb-2 xl:mb-5">
+            Productos
+          </h4>
+          <Link
+            href="/tienda/categorias/papeleria-y-oficina"
+            className="text-white"
+          >
+            Papelería y oficina
+          </Link>
+          <Link
+            href="/tienda/categorias/publicidad-y-exterior"
+            className="text-white"
+          >
+            Publicidad y exterior
+          </Link>
+          <Link
+            href="/tienda/categorias/ropa-y-accesorios"
+            className="text-white"
+          >
+            Ropa y accesorios
+          </Link>
+          <Link
+            href="/tienda/categorias/decoracion-y-regalos"
+            className="text-white"
+          >
+            Decoración y regalos
+          </Link>
+          <Link
+            href="/tienda/categorias/empaques-y-presentacion"
+            className="text-white"
+          >
+            Empaques y presentación
+          </Link>
+          <Link
+            href="/tienda/categorias/grandes-formatos"
+            className="text-white"
+          >
+            Grandes formatos
+          </Link>
+        </div>
+        <div className="flex flex-col xl:items-start items-center space-y-2 ml-0 xl:ml-40 mt-10 mb-6 xl:my-0">
+          <h4 className="text-white text-xl font-semibold mb-2 xl:mb-5">
+            Nuestros servicios
+          </h4>
+          <Link href="/servicios-de-diseno" className="text-white">
+            Impresión digital
+          </Link>
+          <Link href="/servicios-de-diseno" className="text-white">
+            Branding
+          </Link>
+          <Link href="/servicios-de-diseno" className="text-white">
+            Imagen corporativa
+          </Link>
+          <Link href="/servicios-de-diseno" className="text-white">
+            Diseño redes sociales
+          </Link>
+        </div>
+        <div className="flex flex-col xl:items-start items-center space-y-2 ml-0 xl:ml-40 mt-10 mb-6 xl:my-0">
+          <h4 className="text-white text-xl font-semibold mb-2 xl:mb-5">
+            Duotono
+          </h4>
+          <Link href="/quienes-somos" className="text-white">
+            Sobre nosotros
+          </Link>
+          <Link href="/contacto" className="text-white">
+            Contáctanos
+          </Link>
+          <Link
+            href="https://www.google.com/maps?rlz=1C1UEAD_esES1071ES1071&gs_lcrp=EgZjaHJvbWUqCQgAECMYJxiKBTIJCAAQIxgnGIoFMg0IARAuGK8BGMcBGIAEMgYIAhBFGEEyBggDEEUYQTIGCAQQRRg8MgYIBRBFGEHSAQgyNTIwajBqN6gCALACAA&um=1&ie=UTF-8&fb=1&gl=es&sa=X&geocode=KQvRxDYTf2oMMdQ2gwfjQEyf&daddr=C.+la+Carreta,+20,+38400+Puerto+de+la+Cruz,+Santa+Cruz+de+Tenerife"
+            className="text-white"
+          >
+            Ubicación
+          </Link>
+        </div>
+        {/* <div className="flex flex-col xl:items-start items-center space-y-2 ml-0 xl:ml-40 mt-10 mb-6 xl:my-0">
                     <h4 className="text-white text-xl font-semibold mb-2 xl:mb-5">Soporte</h4>
                     <Link href="/" className="text-white">Preguntas frecuentes</Link>
                     <Link href="/" className="text-white">Centro de ayuda</Link>
                 </div> */}
-            </div>
-            <div className="flex flex-col space-y-10 mt-20 mx-0 xl:mx-20">
-                <div className="w-full h-[1px] bg-terciary"></div>
-                <p className="text-white text-lg text-center">Copyright © 2023 duotono | Todos los derechos reservados</p>
-            </div>
-       </div>
-    )
-}
+      </div>
+      <div className="flex flex-col space-y-10 mt-20 mx-0 xl:mx-20">
+        <div className="w-full h-[1px] bg-terciary"></div>
+        <p className="text-white text-lg text-center">
+          Copyright © {currentYear} Duotono Design | Todos los derechos
+          reservados
+        </p>
+      </div>
+    </div>
+  );
+};
 
-export default Footer
+export default Footer;

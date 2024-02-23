@@ -77,7 +77,6 @@ export default function Prueba() {
     { clientSecret: clientSecretUpdated },
     [clientSecretUpdated] // Include the variable here to trigger re-fetch
   );
-  const router = useRouter();
 
   useEffect(() => {
     if (clientStripePaymentIntent?.createStripePaymentIntent !== undefined) {
@@ -316,8 +315,7 @@ export default function Prueba() {
                             className="flex space-x-4 py-1 items-center"
                             key={i}
                           >
-                            <div className="font-bold">{option.code}:</div>
-                            <div className="">{option.name}</div>
+                            <div className="font-bold">{option.name}</div>
                           </div>
                         ))}
                       </div>

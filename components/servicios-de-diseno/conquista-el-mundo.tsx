@@ -17,7 +17,7 @@ const ConquistaElMundo = () => {
           <Link href="/contacto" target="_blank">
             <Button
               variant="defaultBlack"
-              className="rounded-xl gap-x-2 shrink-0 text-xs xl:text-base px-12"
+              className="rounded-xl gap-x-2 shrink-0 text-xs xl:text-base px-12 py-8"
             >
               Empieza tu campaña
             </Button>
