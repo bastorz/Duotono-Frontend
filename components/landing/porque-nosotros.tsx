@@ -51,7 +51,7 @@ const PorqueNosotros = () => {
           <Link href="/tienda">
             <Button
               variant="default"
-              className="bg-first rounded-xl gap-x-2 shrink-0 text-xs xl:text-base "
+              className="bg-first rounded-xl gap-x-2 shrink-0   "
             >
               Ver productos
               <ArrowRight className="w-4 xl:w-6" />

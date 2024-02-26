@@ -187,10 +187,6 @@ const ProductosPrueba = ({ params }: { params: { slug: string } }) => {
 
   const totalPrice = formatCurrency(variantPrice);
 
-  const totalPriceWithTax = formatCurrency(variantPrice);
-
-  console.log('optionPricesArray', optionPricesArray);
-
   if (loading)
     return (
       <div className="h-screen flex items-center justify-center">
@@ -203,7 +199,7 @@ const ProductosPrueba = ({ params }: { params: { slug: string } }) => {
   return (
     <div className="xl:px-10 py-20 flex flex-col space-y-4">
       <div className="py-4">
-        <ul className="flex space-x-4">
+        <ul className="hidden md:flex space-x-4">
           <Link href="/">
             <li className="flex space-x-4 items-center">
               <Home />
@@ -221,6 +217,9 @@ const ProductosPrueba = ({ params }: { params: { slug: string } }) => {
             <p className="text-lg font-bold">{productData?.product.name}</p>
           </li>
         </ul>
+        <p className="text-lg font-bold px-2 flex md:hidden">
+          {productData?.product.name}
+        </p>
       </div>
       <div className="flex flex-col xl:flex-row xl:bg-black mb-10">
         {productData?.product?.featuredAsset?.preview && (
@@ -229,7 +228,7 @@ const ProductosPrueba = ({ params }: { params: { slug: string } }) => {
             alt="Product Preview"
             width={600}
             height={600}
-            className="bg-white object-center"
+            className="bg-white object-center w-full"
           />
         )}
         <div className="xl:h-[500px] bg-black space-y-4 flex flex-col p-4 xl:p-10">
@@ -258,7 +257,7 @@ const ProductosPrueba = ({ params }: { params: { slug: string } }) => {
               productData?.product.customFields.Proceso_De_Pedido
             )}
           />
-          <div className="flex space-x-10">
+          <div className="flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:space-x-10">
             <Link href="#selectOptions" className="flex gap-x-4">
               <Button
                 variant="default"

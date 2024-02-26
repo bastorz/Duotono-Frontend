@@ -26,7 +26,7 @@ const TuEmpresaBrille = () => {
           <Link href="/contacto" target="_blank">
             <Button
               variant="default"
-              className="bg-first rounded-xl gap-x-2 shrink-0 text-xs xl:text-base px-12 py-8"
+              className="bg-first rounded-xl gap-x-2 shrink-0 px-10 py-8"
             >
               Inicia tu rediseño
             </Button>

@@ -111,7 +111,7 @@ const Footer = () => {
             Duotono
           </h4>
           <Link href="/quienes-somos" className="text-white">
-            Sobre nosotros
+            Sobre nosotro
           </Link>
           <Link href="/contacto" className="text-white">
             Contáctanos

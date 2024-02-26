@@ -26,7 +26,7 @@ const PorDondeComenzar = () => {
           <Link href="/contacto" target="_blank">
             <Button
               variant="default"
-              className="bg-first rounded-xl gap-x-2 shrink-0 text-xs xl:text-base font-semibold py-6"
+              className="bg-first rounded-xl gap-x-2 shrink-0 font-semibold px-10 py-6"
             >
               Te ayudamos
             </Button>
@@ -34,7 +34,7 @@ const PorDondeComenzar = () => {
           <Link href="/tienda" target="_blank">
             <Button
               variant="ghost"
-              className="rounded-xl gap-x-2 shrink-0 text-xs xl:text-base border border-black py-6"
+              className="rounded-xl gap-x-2 shrink-0 border border-black px-5 py-6"
             >
               Ver más productos
             </Button>
