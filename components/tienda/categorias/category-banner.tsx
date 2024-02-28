@@ -26,7 +26,7 @@ const CategoryBanner = () => {
           <Link href="/contacto" target="_blank">
             <Button
               variant="default"
-              className="bg-black rounded-xl gap-x-2 shrink-0 text-xs xl:text-base text-white px-12 py-6"
+              className="bg-black rounded-xl gap-x-2 shrink-0   text-white px-12 py-6"
             >
               Contactar
             </Button>

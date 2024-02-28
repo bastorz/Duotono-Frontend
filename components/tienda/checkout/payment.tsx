@@ -15,6 +15,8 @@ export function StripePayments({
   clientSecret,
   orderCode,
 }: StripePaymentsProps) {
+  console.log('pruebas', clientSecret);
+
   const options = {
     // passing the client secret obtained from the server
     clientSecret,

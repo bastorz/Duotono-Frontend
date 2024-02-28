@@ -34,7 +34,7 @@ const ConoceNuestroEquipo = () => {
           {' '}
           <Button
             variant="ghost"
-            className="rounded-xl gap-x-2 shrink-0 text-xs xl:text-base border border-black px-10"
+            className="rounded-xl gap-x-2 shrink-0   border border-black px-10"
           >
             Conoce nuestros servicios
           </Button>
@@ -42,7 +42,7 @@ const ConoceNuestroEquipo = () => {
         <Link href="/contacto" target="_blank">
           <Button
             variant="default"
-            className="bg-first rounded-xl gap-x-2 shrink-0 text-xs xl:text-base px-20"
+            className="bg-first rounded-xl gap-x-2 shrink-0   px-20"
           >
             Te ayudamos
           </Button>

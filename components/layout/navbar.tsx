@@ -66,7 +66,7 @@ const Navbar = () => {
         )}
         onClick={toggleNav}
       >
-        <div className="flex items-center justify-between px-4 md:px-[40px] lg:px-10">
+        <div className="flex items-center justify-between px-8 md:px-[40px] lg:px-10 pt-4">
           <Link href="/" className="flex gap-x-2">
             <Image
               src="/Logo.svg"
@@ -81,6 +81,16 @@ const Navbar = () => {
 
       {toggleMenu && screenWidth < 1025 && (
         <div className="flex flex-col space-y-4 py-2 px-[17px]">
+          <Link
+            href="/tienda"
+            className={cn(
+              pathname === '/servicios-de-diseno'
+                ? 'text-black font-bold'
+                : 'text-black/80 font-bold'
+            )}
+          >
+            Tienda
+          </Link>
           <Link
             href="/servicios-de-diseno"
             className={cn(

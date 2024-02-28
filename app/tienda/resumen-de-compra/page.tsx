@@ -78,6 +78,10 @@ export default function Prueba() {
     [clientSecretUpdated] // Include the variable here to trigger re-fetch
   );
 
+  console.log('clientStripePaymentIntent', clientStripePaymentIntent);
+  console.log('clientSecret', clientSecret);
+  console.log('clientSecretUpdated', clientSecretUpdated);
+
   useEffect(() => {
     if (clientStripePaymentIntent?.createStripePaymentIntent !== undefined) {
       setClientSecret(clientStripePaymentIntent?.createStripePaymentIntent);

@@ -18,7 +18,7 @@ const ElevaTuMarca = () => {
             {' '}
             <Button
               variant="defaultBlack"
-              className="text-white rounded-xl gap-x-2 shrink-0 text-xs xl:text-base px-12 py-8"
+              className="text-white rounded-xl gap-x-2 shrink-0 px-12 py-8"
             >
               Hablemos de tu marca
             </Button>
