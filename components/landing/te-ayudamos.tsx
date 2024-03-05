@@ -2,8 +2,27 @@ import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { Carousel } from '../ui/carousel';
 
 const TeAyudamos = () => {
+  const slides = [
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/flyers-a4.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/bolsa+de+tela.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/camisetas-deportivas-poliester.jpeg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/taza-con-caja.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/tarjeta-de-visita.jpeg',
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center">
       <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8">
@@ -34,14 +53,8 @@ const TeAyudamos = () => {
           </Link>
         </div>
       </div>
-      <div className="mt-20 mb-0 xl:my-20 bg-first w-full xl:w-auto flex items-center justify-center">
-        <Image
-          src="/5.png"
-          alt="5"
-          width={700}
-          height={700}
-          className="rounded-md"
-        />
+      <div className="mt-20 mb-0 xl:my-20 w-full xl:w-auto flex items-center justify-center">
+        <Carousel slides={[...slides]} />
       </div>
     </div>
   );

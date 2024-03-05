@@ -43,9 +43,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { StripePayments } from '@/components/tienda/checkout/payment';
-import { useRouter } from 'next/navigation';
 
-export default function Prueba() {
+export default function Cart() {
   const [activeOrder, setActiveOrder] = useState<OrderPartial>();
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -78,9 +77,10 @@ export default function Prueba() {
     [clientSecretUpdated] // Include the variable here to trigger re-fetch
   );
 
-  console.log('clientStripePaymentIntent', clientStripePaymentIntent);
-  console.log('clientSecret', clientSecret);
-  console.log('clientSecretUpdated', clientSecretUpdated);
+  const isMyOwnDesignAnswer =
+    orderData?.activeOrder.lines[0].productVariant.options.map(
+      (option) => option.name
+    );
 
   useEffect(() => {
     if (clientStripePaymentIntent?.createStripePaymentIntent !== undefined) {
@@ -191,17 +191,6 @@ export default function Prueba() {
       setSelectedPaymentMethod(''); // Reset payment method
     }
   };
-
-  // const handleBizumContainerClick = () => {
-  //   if (!selectedBizum) {
-  //     setSelectedBizum(true);
-  //     setSelectedStripe(false); // Deselect Stripe
-  //     setSelectedPaymentMethod("bizum");
-  //   } else {
-  //     setSelectedBizum(false);
-  //     setSelectedPaymentMethod("null"); // Reset payment method
-  //   }
-  // };
 
   const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -582,6 +571,7 @@ export default function Prueba() {
                         <StripePayments
                           clientSecret={clientSecret}
                           orderCode={''}
+                          isMyOwnDesign={isMyOwnDesignAnswer?.[3]}
                         />
                       </DialogHeader>
                     )}

@@ -2,8 +2,27 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Carousel } from '../ui/carousel';
 
 const LandingHero = () => {
+  const slides = [
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/flyers-a4.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/bolsa+de+tela.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/camisetas-deportivas-poliester.jpeg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/taza-con-caja.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/tarjeta-de-visita.jpeg',
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center">
       <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8">
@@ -36,13 +55,7 @@ const LandingHero = () => {
         </div>
       </div>
       <div className="my-20">
-        <Image
-          src="/1.png"
-          alt="1"
-          width={700}
-          height={700}
-          className="rounded-md"
-        />
+        <Carousel slides={[...slides]} />
       </div>
     </div>
   );

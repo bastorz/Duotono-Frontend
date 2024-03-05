@@ -4,18 +4,36 @@ import { Carousel } from '../ui/carousel';
 import Link from 'next/link';
 
 const ProductosDestacados = () => {
+  const slides = [
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/flyers-a4.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/bolsa+de+tela.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/camisetas-deportivas-poliester.jpeg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/taza-con-caja.jpg',
+    },
+    {
+      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/tarjeta-de-visita.jpeg',
+    },
+  ];
+
   return (
     <>
       <div className="flex flex-col items-center justify-center space-y-10">
         <h2 className="font-bold text-5xl xl:text-7xl max-w-2xl text-center">
           Descubre nuestros productos
         </h2>
-        <p className="text-black/80 max-w-[600px] text-center">
+        <p className="text-black/80 max-w-[600px] text-center px-2">
           Expertos en impresión digital de alta calidad. Convierte tus diseños
           en obras maestras con tecnología avanzada y servicio personalizado.
         </p>
       </div>
-      <div className="hidden xl:grid grid-cols-5 place-items-center place-content-center w-full py-10">
+      <div className="grid grid-cols-1 xl:grid-cols-5 place-items-center place-content-center w-full py-10 gap-y-5 lg:gap-y-0">
         <Link
           href="/tienda/productos/tarjeta-de-visita"
           className="flex flex-col items-center justify-center space-y-8"
@@ -84,7 +102,6 @@ const ProductosDestacados = () => {
           <p className="font-semibold text-xl">Flyers A4</p>
         </Link>
       </div>
-      <Carousel />
     </>
   );
 };
