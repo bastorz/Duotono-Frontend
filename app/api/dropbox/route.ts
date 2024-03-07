@@ -44,7 +44,7 @@ export async function POST(req: Request, res: NextApiResponse) {
   // Initialize Dropbox API
   const dropbox = new Dropbox({
     accessToken:
-      'sl.Bw8Z8vm9WzwTNQ9HOTlxp1jogMQshasNrSY7wVaPtekmaKQhU1dUHOSd5JHcHJnLRKsovI45_BODTluUZyA5j8NqBiplzOUdpyKXAwNnx3ksBbOs-bRXTc3MBNC9qT7u_yRRg0x--irge-tBPJr2o4E',
+      'sl.Bw8hIn8bEohTWq-Z8l6Qp42P4oe_X168_0QE1ll_G7_NTMO-Vx7EuFXP6_NvDtVHUa5MJRN1MvAybAvtdnvTpubzOcRp387L2X60kg05IVz01dYkwjcYM0ZPGQb1XyKQfuPqVClbZFhu4DjvI3cO46A',
   });
 
   // Create a folder in Dropbox

@@ -65,6 +65,8 @@ export default function Cart() {
   const [isLoading, setIsLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState<string>('');
   const [generatedToken, setGeneratedToken] = useState('');
+  const [useMyDesign, setUseMyDesign] = useState('No');
+
   const {
     data: orderData,
     loading,
@@ -78,18 +80,37 @@ export default function Cart() {
     [clientSecretUpdated] // Include the variable here to trigger re-fetch
   );
 
-  const isMyOwnDesignAnswer = activeOrder
-    ? orderData?.activeOrder.lines[0].productVariant.options.map(
-        (option) => option.name
-      )
-    : null;
+  useEffect(() => {
+    // Suponiendo que orderData es tu objeto de datos
+    if (
+      orderData &&
+      orderData.activeOrder &&
+      orderData.activeOrder.lines &&
+      orderData.activeOrder.lines.length > 0
+    ) {
+      // Obtenemos las opciones de la primera línea de pedido
+      const options = orderData.activeOrder.lines[0].productVariant.options;
+
+      // Verificamos si existen opciones y si alguna es el diseño
+      if (options && options.length > 0) {
+        // Iteramos sobre las opciones para buscar el diseño
+        options.forEach((option) => {
+          if (option.name === 'Usar mi propio diseño') {
+            setUseMyDesign('Si');
+            // Aquí puedes realizar cualquier acción adicional que necesites
+          }
+        });
+      } else {
+        setUseMyDesign('No');
+      }
+    }
+  }, [orderData]);
 
   useEffect(() => {
     if (clientStripePaymentIntent?.createStripePaymentIntent !== undefined) {
       setClientSecret(clientStripePaymentIntent?.createStripePaymentIntent);
     }
     generateToken();
-    console.log('se esta haciendo', generatedToken);
   }, [clientStripePaymentIntent?.createStripePaymentIntent]);
 
   if (orderData?.activeOrder && !activeOrder) {
@@ -216,7 +237,6 @@ export default function Cart() {
 
   // Función para guardar el token en el localStorage
   const saveTokenToLocalStorage = () => {
-    console.log('holaaa', generatedToken);
     localStorage.setItem('authToken', generatedToken);
   };
 
@@ -600,7 +620,7 @@ export default function Cart() {
                         <StripePayments
                           clientSecret={clientSecret}
                           orderCode={''}
-                          isMyOwnDesign={isMyOwnDesignAnswer?.[3]}
+                          isMyOwnDesign={useMyDesign}
                         />
                       </DialogHeader>
                     )}
