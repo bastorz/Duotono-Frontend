@@ -6,45 +6,45 @@ import { Dropbox } from 'dropbox';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
 export async function POST(req: Request, res: NextApiResponse) {
+  // OAuth Dropbox API:
+  // redirect(
+  //   'https://www.dropbox.com/oauth2/authorize?client_id=vlpcttuzr64cg1e&redirect_uri=http://localhost:3000/api/dropbox&response_type=code&access_token_type=offline'
+  // );
+
   const formData = await req.formData();
+  console.log('formData:', formData);
   const name = formData.get('name');
   const lastName = formData.get('lastName');
   const email = formData.get('email');
   const phone = formData.get('phone');
   const message = formData.get('message');
-  const images0 = formData.get(`images[0]`);
-  const images1 = formData.get(`images[1]`);
-  const images2 = formData.get(`images[2]`);
-  const images3 = formData.get(`images[3]`);
-  const images4 = formData.get(`images[4]`);
-  const images5 = formData.get(`images[5]`);
-  const images6 = formData.get(`images[6]`);
-  const images7 = formData.get(`images[7]`);
-  const images8 = formData.get(`images[8]`);
-  const images9 = formData.get(`images[9]`);
+  const imageQuantity = formData.get('imageQuantity')?.toString();
+  const imageQuantityInt = imageQuantity ? parseInt(imageQuantity, 10) : 1;
 
-  const imagesArray = [
-    images0,
-    images1,
-    images2,
-    images3,
-    images4,
-    images5,
-    images6,
-    images7,
-    images8,
-    images9,
-  ];
+  const images = [];
 
-  const images = imagesArray.filter((image) => image !== null);
-  const files = images as Blob[];
-  const bloby = new Blob(files, { type: files[0].type });
-  const buffer = Buffer.from(await bloby.arrayBuffer());
+  for (let i = 0; i < imageQuantityInt; i++) {
+    // Obtener el nombre del campo de la imagen
+    const imageName = `image-[${i}]`;
+    // Obtener la imagen del FormData
+    // const image = formData.get(imageName);
+    const file: File | null = formData.get(imageName) as unknown as File;
+
+    if (!file) {
+      return NextResponse.json({ success: false });
+    }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    // Agregar la imagen al array
+    images.push(buffer);
+  }
 
   // Initialize Dropbox API
   const dropbox = new Dropbox({
     accessToken:
-      'sl.Bp4AzjXiC0Z8msMxjdpS5WdoocuIjz7Fa-Ynpi2MrQadxFZpXdTmmxB9Jf-bccbEhco_AgSFwt15TcBA0BtjSBmzI3yT52F_qbcqD7FEsJwc7brKM0BSjCYBezUCpiOkwLe_XmiDfjn6cjgsonnNjfE',
+      'sl.Bw8Z8vm9WzwTNQ9HOTlxp1jogMQshasNrSY7wVaPtekmaKQhU1dUHOSd5JHcHJnLRKsovI45_BODTluUZyA5j8NqBiplzOUdpyKXAwNnx3ksBbOs-bRXTc3MBNC9qT7u_yRRg0x--irge-tBPJr2o4E',
   });
 
   // Create a folder in Dropbox
@@ -56,10 +56,13 @@ export async function POST(req: Request, res: NextApiResponse) {
     contents: `${name}\n${lastName}\n${email}\n${phone}\n${message}`,
   });
 
-  await dropbox.filesUpload({
-    path: `${folderPath}/imagen.jpg`,
-    contents: buffer,
-  });
+  for (let i = 0; i < images.length; i++) {
+    // Subir la imagen a Dropbox
+    await dropbox.filesUpload({
+      path: `${folderPath}/imagen-${i}.jpg`,
+      contents: images[i],
+    });
+  }
 
   return NextResponse.json({ success: true });
 }

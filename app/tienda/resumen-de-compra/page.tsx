@@ -43,9 +43,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { StripePayments } from '@/components/tienda/checkout/payment';
-import { useRouter } from 'next/navigation';
 
-export default function Prueba() {
+export default function Cart() {
   const [activeOrder, setActiveOrder] = useState<OrderPartial>();
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -65,6 +64,7 @@ export default function Prueba() {
   const [clientSecretUpdated, setClientSecretUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState<string>('');
+  const [generatedToken, setGeneratedToken] = useState('');
   const {
     data: orderData,
     loading,
@@ -78,14 +78,18 @@ export default function Prueba() {
     [clientSecretUpdated] // Include the variable here to trigger re-fetch
   );
 
-  console.log('clientStripePaymentIntent', clientStripePaymentIntent);
-  console.log('clientSecret', clientSecret);
-  console.log('clientSecretUpdated', clientSecretUpdated);
+  const isMyOwnDesignAnswer = activeOrder
+    ? orderData?.activeOrder.lines[0].productVariant.options.map(
+        (option) => option.name
+      )
+    : null;
 
   useEffect(() => {
     if (clientStripePaymentIntent?.createStripePaymentIntent !== undefined) {
       setClientSecret(clientStripePaymentIntent?.createStripePaymentIntent);
     }
+    generateToken();
+    console.log('se esta haciendo', generatedToken);
   }, [clientStripePaymentIntent?.createStripePaymentIntent]);
 
   if (orderData?.activeOrder && !activeOrder) {
@@ -192,16 +196,29 @@ export default function Prueba() {
     }
   };
 
-  // const handleBizumContainerClick = () => {
-  //   if (!selectedBizum) {
-  //     setSelectedBizum(true);
-  //     setSelectedStripe(false); // Deselect Stripe
-  //     setSelectedPaymentMethod("bizum");
-  //   } else {
-  //     setSelectedBizum(false);
-  //     setSelectedPaymentMethod("null"); // Reset payment method
-  //   }
-  // };
+  // Función para generar un token aleatorio
+  const generateToken = () => {
+    // Longitud del token
+    const tokenLength = 16;
+    // Caracteres válidos para el token
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let token = '';
+
+    // Genera un token aleatorio de la longitud especificada
+    for (let i = 0; i < tokenLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      token += characters[randomIndex];
+    }
+
+    setGeneratedToken(token);
+  };
+
+  // Función para guardar el token en el localStorage
+  const saveTokenToLocalStorage = () => {
+    console.log('holaaa', generatedToken);
+    localStorage.setItem('authToken', generatedToken);
+  };
 
   const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -220,6 +237,7 @@ export default function Prueba() {
       await transitionOrderToArrangingPayment();
       await checkClientSecret();
       await setClientSecretUpdated(true);
+      await saveTokenToLocalStorage();
       setIsLoading(false);
       toast.success('Datos de envío guardados correctamente.');
     }
@@ -582,6 +600,7 @@ export default function Prueba() {
                         <StripePayments
                           clientSecret={clientSecret}
                           orderCode={''}
+                          isMyOwnDesign={isMyOwnDesignAnswer?.[3]}
                         />
                       </DialogHeader>
                     )}

@@ -1,8 +1,26 @@
 import Image from 'next/image';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-
+import { Carousel } from '../ui/carousel';
 const ConquistaElMundo = () => {
+  const slides = [
+    {
+      url: '/carruseles/6/COMBO1.jpg',
+    },
+    {
+      url: '/carruseles/6/combo3.jpg',
+    },
+    {
+      url: '/carruseles/6/franela-hombre.jpg',
+    },
+    {
+      url: '/carruseles/6/tarjeta-visita-3.jpg',
+    },
+    {
+      url: '/carruseles/6/tickeras.jpg',
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center">
       <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8">
@@ -25,13 +43,7 @@ const ConquistaElMundo = () => {
         </div>
       </div>
       <div className="my-20">
-        <Image
-          src="/15.png"
-          alt="1"
-          width={700}
-          height={700}
-          className="rounded-md"
-        />
+        <Carousel slides={[...slides]} dotColor={'black'} />
       </div>
     </div>
   );

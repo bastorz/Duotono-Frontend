@@ -6,9 +6,13 @@ import {
   PaymentElement,
 } from '@stripe/react-stripe-js';
 import { FormEvent, useState } from 'react';
-import toast from 'react-hot-toast';
 
-const CheckoutForm = ({ orderCode }: { orderCode: string }) => {
+interface CheckoutFormType {
+  orderCode: string;
+  redirectUrl: string | undefined;
+}
+
+const CheckoutForm = ({ redirectUrl, orderCode }: CheckoutFormType) => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -29,7 +33,7 @@ const CheckoutForm = ({ orderCode }: { orderCode: string }) => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: location.origin + `/tienda/checkout`,
+        return_url: location.origin + redirectUrl,
       },
     });
 

@@ -8,6 +8,7 @@ import { Button } from '../ui/button';
 import CustomFileSelector from './utils/custom-file-selector';
 import ImagePreview from './utils/image-preview';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 
 const options = [
   'Seleccionar una opción',
@@ -29,6 +30,7 @@ const FileUploadForm = () => {
   const [alreadyBought, setAlreadyBought] = useState('');
   const [uploading, setUploading] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('');
+  const [confirmedConsent, setConfirmedConsent] = useState(false);
   const [images, setImages] = useState<File[]>([]);
 
   const handleAlreadyBoughtChange = (value: string) => {
@@ -38,6 +40,11 @@ const FileUploadForm = () => {
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     setSelectedOption(selectedValue);
+  };
+
+  const handleConfirmedConsent = () => {
+    // Cambia el estado actual de confirmedConsent
+    setConfirmedConsent((prevConfirmedConsent) => !prevConfirmedConsent);
   };
 
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +72,7 @@ const FileUploadForm = () => {
       formData.append('alreadyBought', alreadyBought);
       formData.append('selectedOption', selectedOption);
       formData.append('message', message);
+      formData.append('confirmedConsent', confirmedConsent.toString());
       setUploading(true);
       await axios.post('/api/email', formData);
       toast.success('Formulario enviado correctamente');
@@ -227,6 +235,31 @@ const FileUploadForm = () => {
               onChange={handleFileSelected}
             />
             <ImagePreview images={images} />
+          </div>
+          <div className="flex flex-col space-y-4 ">
+            <div className="flex space-x-2">
+              <input
+                type="checkbox"
+                onChange={() => handleConfirmedConsent()}
+                required
+              />
+              <p>
+                Acepto las{' '}
+                <Link
+                  href={'/condiciones-de-uso'}
+                  className="font-semibold underline"
+                >
+                  Condiciones de uso
+                </Link>{' '}
+                y las{' '}
+                <Link
+                  href={'/politicas-de-privacidad'}
+                  className="font-semibold underline"
+                >
+                  políticas de privacidad
+                </Link>
+              </p>
+            </div>
           </div>
           <Button
             type="submit"

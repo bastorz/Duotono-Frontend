@@ -66,7 +66,7 @@ const Navbar = () => {
         )}
         onClick={toggleNav}
       >
-        <div className="flex items-center justify-between px-8 md:px-[40px] lg:px-10 pt-4">
+        <div className="flex items-center justify-between px-8 md:px-[40px] lg:px-10 py-4">
           <Link href="/" className="flex gap-x-2">
             <Image
               src="/Logo.svg"
@@ -80,7 +80,7 @@ const Navbar = () => {
       </div>
 
       {toggleMenu && screenWidth < 1025 && (
-        <div className="flex flex-col space-y-4 py-2 px-[17px]">
+        <div className="flex flex-col space-y-5 pt-2 pb-10 px-8">
           <Link
             href="/tienda"
             className={cn(
@@ -124,7 +124,7 @@ const Navbar = () => {
           <Link href="/tienda/resumen-de-compra">
             <Button
               variant="default"
-              className="bg-second rounded-lg flex items-center space-x-2 "
+              className="bg-second rounded-lg space-x-2 w-[16rem] md:w-[20rem] items-center justify-start"
             >
               <ShoppingCart fill="white" size={20} color="white" />
               <span className="text-white">{activeOrderLenght}</span>

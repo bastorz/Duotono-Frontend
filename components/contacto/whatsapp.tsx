@@ -15,7 +15,7 @@ const Whatsapp = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-50">
       <button className="fixed bottom-2 right-2" onClick={handleClick}>
         <Image
           src="/whatsapp.png"

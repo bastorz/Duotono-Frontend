@@ -1,8 +1,27 @@
 import Image from 'next/image';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { Carousel } from '../ui/carousel';
 
 const ElevaTuMarca = () => {
+  const slides = [
+    {
+      url: '/carruseles/4/combo1.jpg',
+    },
+    {
+      url: '/carruseles/4/furgo.jpg',
+    },
+    {
+      url: '/carruseles/4/gorras2.jpg',
+    },
+    {
+      url: '/carruseles/4/tarjetas-especiales.jpg',
+    },
+    {
+      url: '/carruseles/4/triptico-A4.jpg',
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center">
       <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8">
@@ -26,13 +45,7 @@ const ElevaTuMarca = () => {
         </div>
       </div>
       <div className="my-20">
-        <Image
-          src="/10.png"
-          alt="1"
-          width={700}
-          height={700}
-          className="rounded-md"
-        />
+        <Carousel slides={[...slides]} dotColor={'black'} />
       </div>
     </div>
   );
