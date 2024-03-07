@@ -105,15 +105,29 @@ const Page = ({ params }: { params: { collectionSlug: string } }) => {
               <p className="text-gray-500 max-w-[300px]">
                 {removeHTMLTags(item.product.description)}
               </p>
-              <p className="text-gray-500">1000 unidades por</p>
-              <div className="flex space-x-5">
-                <p className="text-red-500">
-                  {formatCurrency(item.product.customFields.PrecioBase)}
-                </p>
-                <p className="font-bold text-xl">
-                  {formatCurrency(item.product.customFields.Precio1000Unidades)}
-                </p>
-              </div>
+              {item.product.customFields.Precio1000Unidades !==
+              parseInt('0,00') ? (
+                <div>
+                  <p className="text-gray-500">1000 unidades por</p>
+                  <div className="flex items-center space-x-5 pt-2">
+                    <p className="text-red-500">
+                      {formatCurrency(item.product.customFields.PrecioBase)}
+                    </p>
+                    <p className="font-bold text-xl">
+                      {formatCurrency(
+                        item.product.customFields.Precio1000Unidades
+                      )}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  {' '}
+                  <p className="font-bold text-xl">
+                    {formatCurrency(item.product.customFields.PrecioBase)}
+                  </p>
+                </div>
+              )}
             </div>
           ))}
         </div>
