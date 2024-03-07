@@ -64,6 +64,7 @@ export default function Cart() {
   const [clientSecretUpdated, setClientSecretUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState<string>('');
+  const [generatedToken, setGeneratedToken] = useState('');
   const {
     data: orderData,
     loading,
@@ -77,15 +78,18 @@ export default function Cart() {
     [clientSecretUpdated] // Include the variable here to trigger re-fetch
   );
 
-  const isMyOwnDesignAnswer =
-    orderData?.activeOrder.lines[0].productVariant.options.map(
-      (option) => option.name
-    );
+  const isMyOwnDesignAnswer = activeOrder
+    ? orderData?.activeOrder.lines[0].productVariant.options.map(
+        (option) => option.name
+      )
+    : null;
 
   useEffect(() => {
     if (clientStripePaymentIntent?.createStripePaymentIntent !== undefined) {
       setClientSecret(clientStripePaymentIntent?.createStripePaymentIntent);
     }
+    generateToken();
+    console.log('se esta haciendo', generatedToken);
   }, [clientStripePaymentIntent?.createStripePaymentIntent]);
 
   if (orderData?.activeOrder && !activeOrder) {
@@ -192,6 +196,30 @@ export default function Cart() {
     }
   };
 
+  // Función para generar un token aleatorio
+  const generateToken = () => {
+    // Longitud del token
+    const tokenLength = 16;
+    // Caracteres válidos para el token
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let token = '';
+
+    // Genera un token aleatorio de la longitud especificada
+    for (let i = 0; i < tokenLength; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      token += characters[randomIndex];
+    }
+
+    setGeneratedToken(token);
+  };
+
+  // Función para guardar el token en el localStorage
+  const saveTokenToLocalStorage = () => {
+    console.log('holaaa', generatedToken);
+    localStorage.setItem('authToken', generatedToken);
+  };
+
   const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
@@ -209,6 +237,7 @@ export default function Cart() {
       await transitionOrderToArrangingPayment();
       await checkClientSecret();
       await setClientSecretUpdated(true);
+      await saveTokenToLocalStorage();
       setIsLoading(false);
       toast.success('Datos de envío guardados correctamente.');
     }

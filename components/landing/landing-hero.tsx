@@ -7,19 +7,19 @@ import { Carousel } from '../ui/carousel';
 const LandingHero = () => {
   const slides = [
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/flyers-a4.jpg',
+      url: '/carruseles/1/bolsa-de-tela.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/bolsa+de+tela.jpg',
+      url: '/carruseles/1/camisa-chico.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/camisetas-deportivas-poliester.jpeg',
+      url: '/carruseles/1/empaque-combo.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/taza-con-caja.jpg',
+      url: '/carruseles/1/rollup.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/tarjeta-de-visita.jpeg',
+      url: '/carruseles/1/taza-galeon.jpg',
     },
   ];
 
@@ -29,12 +29,12 @@ const LandingHero = () => {
         <h1 className="font-bold text-5xl xl:text-7xl max-w-2xl text-center xl:text-left">
           Expande tu marca, crea tus productos
         </h1>
-        <p className="text-black/80 max-w-[600px] text-center xl:text-left">
+        <p className="text-black/80 lg:max-w-[600px] text-center xl:text-left">
           Transforma tus ideas en impresos vívidos. Con tecnología de punta y
           expertos a tu servicio, hacemos realidad tu visión en Tenerife y el
           mundo.
         </p>
-        <div className="flex items-center justify-center xl:justify-start space-x-6">
+        <div className="flex flex-col lg:flex-row items-center justify-center xl:justify-start space-y-4 lg:space-y-0 lg:space-x-6">
           <Link href="/tienda">
             <Button
               variant="default"
@@ -55,7 +55,7 @@ const LandingHero = () => {
         </div>
       </div>
       <div className="my-20">
-        <Carousel slides={[...slides]} />
+        <Carousel slides={[...slides]} dotColor={'black'} />
       </div>
     </div>
   );

@@ -7,26 +7,26 @@ import { Carousel } from '../ui/carousel';
 const PorqueNosotros = () => {
   const slides = [
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/flyers-a4.jpg',
+      url: '/carruseles/2/bolso-ecologico.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/bolsa+de+tela.jpg',
+      url: '/carruseles/2/botella-madera.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/camisetas-deportivas-poliester.jpeg',
+      url: '/carruseles/2/empaque-funda.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/taza-con-caja.jpg',
+      url: '/carruseles/2/empaque-paya.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/tarjeta-de-visita.jpeg',
+      url: '/carruseles/2/empaques-jabones.jpg',
     },
   ];
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center bg-black px-0 xl:px-10 2xl:px-40">
       <div className="mt-20 xl:my-20">
-        <Carousel slides={[...slides]} />
+        <Carousel slides={[...slides]} dotColor={'white'} />
       </div>
       <div className="flex flex-col space-y-10 items-center xl:items-start h-full py-20">
         <h2 className="font-bold text-5xl xl:text-5xl text-center text-white">
@@ -59,17 +59,6 @@ const PorqueNosotros = () => {
             te brinda consultoría para maximizar el impacto visual de tus
             archivos.
           </p>
-        </div>
-        <div className="flex items-center justify-center xl:justify-start space-x-6 w-full">
-          <Link href="/tienda">
-            <Button
-              variant="default"
-              className="bg-first rounded-xl gap-x-2 shrink-0   "
-            >
-              Ver productos
-              <ArrowRight className="w-4 xl:w-6" />
-            </Button>
-          </Link>
         </div>
       </div>
     </div>

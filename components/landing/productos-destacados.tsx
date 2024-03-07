@@ -33,7 +33,7 @@ const ProductosDestacados = () => {
           en obras maestras con tecnología avanzada y servicio personalizado.
         </p>
       </div>
-      <div className="grid grid-cols-1 xl:grid-cols-5 place-items-center place-content-center w-full py-10 gap-y-5 lg:gap-y-0">
+      <div className="grid grid-cols-1 xl:grid-cols-5 place-items-center place-content-center w-full py-10 gap-y-5 lg:gap-y-10 xl:gap-y-0">
         <Link
           href="/tienda/productos/tarjeta-de-visita"
           className="flex flex-col items-center justify-center space-y-8"

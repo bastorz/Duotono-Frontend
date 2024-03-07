@@ -7,33 +7,33 @@ import { Carousel } from '../ui/carousel';
 const TeAyudamos = () => {
   const slides = [
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/flyers-a4.jpg',
+      url: '/carruseles/3/botellas-750ml.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/bolsa+de+tela.jpg',
+      url: '/carruseles/3/calendarios-mesa-simple.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/camisetas-deportivas-poliester.jpeg',
+      url: '/carruseles/3/chapas.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/taza-con-caja.jpg',
+      url: '/carruseles/3/sudaderas-retiro.jpg',
     },
     {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/tarjeta-de-visita.jpeg',
+      url: '/carruseles/3/TDV.jpg',
     },
   ];
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center">
       <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8">
-        <h1 className="font-bold text-5xl xl:text-7xl max-w-2xl text-center xl:text-left">
+        <h1 className="font-bold text-5xl xl:text-7xl xl:max-w-2xl text-center xl:text-left lg:px-40 xl:px-0">
           Te ayudamos con tu impresión digital
         </h1>
-        <p className="text-black/80 max-w-[600px] text-center xl:text-left">
+        <p className="text-black/80 xl:max-w-[600px] text-center xl:text-left lg:px-40 xl:px-0">
           Eleva tu marca con la más alta calidad en impresión digital.
           Precisión, rapidez y confiabilidad. ¡Haz que tu proyecto destaque!
         </p>
-        <div className="flex items-center justify-center xl:justify-start space-x-6">
+        <div className="flex flex-col xl:flex-row items-center justify-center md:justify-start space-y-4 xl:space-y-0 xl:space-x-6">
           <Link href="/tienda">
             <Button
               variant="default"
@@ -54,7 +54,7 @@ const TeAyudamos = () => {
         </div>
       </div>
       <div className="mt-20 mb-0 xl:my-20 w-full xl:w-auto flex items-center justify-center">
-        <Carousel slides={[...slides]} />
+        <Carousel slides={[...slides]} dotColor={'black'} />
       </div>
     </div>
   );

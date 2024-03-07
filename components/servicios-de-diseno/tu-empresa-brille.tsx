@@ -1,18 +1,31 @@
 import Image from 'next/image';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { Carousel } from '../ui/carousel';
 
 const TuEmpresaBrille = () => {
+  const slides = [
+    {
+      url: '/carruseles/5/Botellas2.jpg',
+    },
+    {
+      url: '/carruseles/5/Camisetas-deportivas.jpg',
+    },
+    {
+      url: '/carruseles/5/cuadernos.jpg',
+    },
+    {
+      url: '/carruseles/5/ecologicas.jpg',
+    },
+    {
+      url: '/carruseles/5/rotulo-coche.jpg',
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center">
       <div className="my-20 order-2 xl:order-1">
-        <Image
-          src="/13.png"
-          alt="1"
-          width={700}
-          height={700}
-          className="rounded-md"
-        />
+        <Carousel slides={[...slides]} dotColor={'black'} />
       </div>
       <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8 order-1 xl:order-2">
         <h3 className="font-bold text-5xl xl:text-5xl max-w-2xl text-center xl:text-left">

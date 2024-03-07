@@ -7,9 +7,10 @@ interface CarouselProps {
   slides: {
     url: string;
   }[];
+  dotColor: string;
 }
 
-export const Carousel = ({ slides }: CarouselProps) => {
+export const Carousel = ({ slides, dotColor }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Función para ir al siguiente slide
@@ -39,7 +40,7 @@ export const Carousel = ({ slides }: CarouselProps) => {
     setCurrentIndex(slideIndex);
   };
   return (
-    <div className="flex flex-col w-[24rem] h-[24rem] lg:w-[40rem] lg:h-[40rem] m-auto py-4 lg:py-16 px-4 relative group">
+    <div className="flex flex-col w-[20rem] h-[20rem] lg:w-[40rem] lg:h-[40rem] m-auto py-4 lg:py-16 px-4 relative group">
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
         className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
@@ -57,7 +58,7 @@ export const Carousel = ({ slides }: CarouselProps) => {
             onClick={() => goToSlide(slideIndex)}
             className="text-2xl cursor-pointer"
           >
-            {/* <Dot /> */}
+            <Dot color={dotColor} />
           </div>
         ))}
       </div>

@@ -14,6 +14,7 @@ export async function POST(req: Request) {
   const alreadyBought = formData.get('alreadyBought');
   const selectedOption = formData.get('selectedOption');
   const message = formData.get('message');
+  const confirmedConsent = formData.get('confirmedConsent');
 
   const transport = nodemailer.createTransport({
     host: 'smtp.hostinger.com',
@@ -39,7 +40,7 @@ export async function POST(req: Request) {
         to: process.env.SMTP_EMAIL,
         // cc: email, (uncomment this line if you want to send a copy to the sender)
         subject: `Formulario de Duotono.es`,
-        html: `<h4>Mensaje de: ${name} ${lastName}</h4></br></br><p>Email: ${email}</p></br></br><p>Teléfono: ${phone}</p></br></br><p>Empresa: ${company}</p></br></br><p>Ha comprado ya en la tienda? ${alreadyBought}</p></br></br><p>Tipo de producto que necesita: ${selectedOption}</p></br></br><p>${message}</p></br>`,
+        html: `<h4>Mensaje de: ${name} ${lastName}</h4></br></br><p>Email: ${email}</p></br></br><p>Teléfono: ${phone}</p></br></br><p>Empresa: ${company}</p></br></br><p>Ha comprado ya en la tienda? ${alreadyBought}</p></br></br><p>Tipo de producto que necesita: ${selectedOption}</p></br></br><p>${message}</p></br></br><p>Acepta las condiciones de uso y la política de privacidad: ${confirmedConsent}</p></br></br><p>${message}</p></br>`,
         attachments: [
           {
             filename: 'image.png',

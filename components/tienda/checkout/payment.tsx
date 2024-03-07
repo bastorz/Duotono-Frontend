@@ -22,7 +22,7 @@ export function StripePayments({
 
   useEffect(() => {
     if (isMyOwnDesign === 'Si') {
-      setRedirectUrl('/checkout/cargar-mi-diseno');
+      setRedirectUrl('/tienda/checkout/cargar-mi-diseno');
     } else {
       setRedirectUrl('/compra-realizada');
     }
