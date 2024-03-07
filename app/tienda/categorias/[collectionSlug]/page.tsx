@@ -46,6 +46,8 @@ const Page = ({ params }: { params: { collectionSlug: string } }) => {
       return false;
     });
 
+  console.log('filteredProducts:', filteredProducts);
+
   return (
     <div>
       <div className="xl:px-32 px-8 py-20 flex flex-col space-y-6 h-full">

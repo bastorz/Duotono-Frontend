@@ -104,14 +104,14 @@ export const TRANSITION_ORDER_TO_CANCELLED = /*GraphQL*/ `
   ${ACTIVE_ORDER_FRAGMENT}
 `;
 
-export const ADD_SHIPPING_METHOD = /*GraphQL*/`
+export const ADD_SHIPPING_METHOD = /*GraphQL*/ `
   mutation addShippingMethodToOrder($shippingMethodId: ID!){
     setOrderShippingMethod(shippingMethodId: [$shippingMethodId]) {
       __typename
     }
   }
-`
-export const ADD_BILLING_ADDRESS = /*GraphQL*/`
+`;
+export const ADD_BILLING_ADDRESS = /*GraphQL*/ `
 mutation addBillingAddress($fullName: String!, $company: String!, $phoneNumber: String!, $streetLine1: String!, $city: String!, $postalCode: String!, $countryCode: String!) {
   setOrderBillingAddress(input: {
     fullName: $fullName,
@@ -129,8 +129,8 @@ mutation addBillingAddress($fullName: String!, $company: String!, $phoneNumber: 
     }
   }
 }
-`
-export const ADD_SHIPPING_ADDRESS = /*GraphQL*/`
+`;
+export const ADD_SHIPPING_ADDRESS = /*GraphQL*/ `
 mutation addShippingAddress($fullName: String!, $company: String!, $phoneNumber: String!, $streetLine1: String!, $city: String!, $postalCode: String!, $countryCode: String!) {
   setOrderShippingAddress(input: {
     fullName: $fullName,
@@ -148,9 +148,9 @@ mutation addShippingAddress($fullName: String!, $company: String!, $phoneNumber:
     }
   }
 }
-`
+`;
 
-export const ADD_PAYMENT_TO_ORDER = /*GraphQL*/`
+export const ADD_PAYMENT_TO_ORDER = /*GraphQL*/ `
 mutation addPaymentToOrder($method: String!){
   addPaymentToOrder(input: {
     method: $method,
@@ -167,13 +167,13 @@ mutation addPaymentToOrder($method: String!){
 }
 `;
 
-export const GET_CLIENT_SECRET = /*GraphQL*/`
+export const GET_CLIENT_SECRET = /*GraphQL*/ `
   mutation {
     createStripePaymentIntent
   }
 `;
 
-export const ADD_CUSTOMER_FOR_ORDER = /*GraphQL*/`
+export const ADD_CUSTOMER_FOR_ORDER = /*GraphQL*/ `
   mutation addCustomerForOrder($firstName: String!, $lastName: String!, $phoneNumber: String!, $emailAddress: String!) {
     setCustomerForOrder(input: {
       firstName: $firstName,
@@ -184,7 +184,7 @@ export const ADD_CUSTOMER_FOR_ORDER = /*GraphQL*/`
       __typename
     }
   }
-`
+`;
 
 export const REMOVE_ITEM_FROM_ORDER = /*GraphQL*/ `
   mutation RemoveItemFromOrder($orderLineId: ID!) {
@@ -243,6 +243,9 @@ query GetProductDetail($slug: String!) {
   product(slug: $slug) {
     id
     name
+    facetValues {
+      name
+    }
     description
     optionGroups {
       name
@@ -322,6 +325,9 @@ query getCollectionsBySlug($slug: String!) {
         product {
           name
           slug
+          facetValues {
+            name
+          }
           description
           customFields {
             PrecioBase
@@ -354,7 +360,7 @@ query getCollectionsBySlug($slug: String!) {
 
 `;
 
-export const GET_ELIGIBLE_SHIPPING_METHODS = /*GraphQL*/`
+export const GET_ELIGIBLE_SHIPPING_METHODS = /*GraphQL*/ `
   query {
     eligibleShippingMethods {
       id
@@ -363,4 +369,3 @@ export const GET_ELIGIBLE_SHIPPING_METHODS = /*GraphQL*/`
     }
   }
 `;
-

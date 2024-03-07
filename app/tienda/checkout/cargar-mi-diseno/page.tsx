@@ -26,15 +26,11 @@ const Page = () => {
     setConfirmedConsent((prevConfirmedConsent) => !prevConfirmedConsent);
   };
 
-  useEffect(() => {
-    console.log(confirmedConsent, 'confirmedConsent');
-  }, [confirmedConsent]);
-
-  // useLayoutEffect(() => {
-  //   if (localStorage.getItem('authToken') === null) {
-  //     redirect('/');
-  //   }
-  // }, []);
+  useLayoutEffect(() => {
+    if (localStorage.getItem('authToken') === null) {
+      redirect('/');
+    }
+  }, []);
 
   const router = useRouter();
 
@@ -61,11 +57,11 @@ const Page = () => {
       });
       formData.append('imageQuantity', images.length.toString());
       console.log('formData:', formData.toString());
-      // setUploading(true);
+      setUploading(true);
       await axios.post('/api/dropbox', formData);
-      // setUploading(false);
-      // toast.success('Documento enviado correctamente.');
-      // router.push('/tienda/checkout/compra-realizada');
+      setUploading(false);
+      toast.success('Documento enviado correctamente.');
+      router.push('/tienda/checkout/compra-realizada');
     } catch (error) {
       toast.error('No se puede enviar el formulario.');
       setUploading(false);

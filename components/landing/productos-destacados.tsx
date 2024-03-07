@@ -2,25 +2,18 @@ import Image from 'next/image';
 import React from 'react';
 import { Carousel } from '../ui/carousel';
 import Link from 'next/link';
+import { useQuery } from '@/lib/use-query';
+import { Collection } from '@/lib/type';
+import { GET_COLLECTIONS_BY_SLUG } from '@/lib/document';
 
 const ProductosDestacados = () => {
-  const slides = [
-    {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/flyers-a4.jpg',
-    },
-    {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/bolsa+de+tela.jpg',
-    },
-    {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/camisetas-deportivas-poliester.jpeg',
-    },
-    {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/taza-con-caja.jpg',
-    },
-    {
-      url: 'https://duotonodesign.s3.eu-west-3.amazonaws.com/tarjeta-de-visita.jpeg',
-    },
-  ];
+  const {
+    data: collectionsData,
+    loading,
+    error,
+  } = useQuery<Collection>(GET_COLLECTIONS_BY_SLUG, {
+    slug: '',
+  });
 
   return (
     <>
