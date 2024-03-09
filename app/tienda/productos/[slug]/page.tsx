@@ -378,7 +378,9 @@ const ProductosPrueba = ({ params }: { params: { slug: string } }) => {
                 <div className="animate-spin rounded-full border-t-4 border-white h-4 w-4"></div>
               </div>
             ) : (
-              <p className="text-xs md:text-md">Añadir y seguir comprando</p>
+              <p className="text-xs md:text-md xl:text-lg">
+                Añadir y seguir comprando
+              </p>
             )}
           </Button>
           <Button
@@ -391,7 +393,7 @@ const ProductosPrueba = ({ params }: { params: { slug: string } }) => {
                 <div className="animate-spin rounded-full border-t-4 border-white h-4 w-4"></div>
               </div>
             ) : (
-              <p className="text-xs md:text-md">Comprar ahora</p>
+              <p className="text-xs md:text-md xl:text-lg">Comprar ahora</p>
             )}
           </Button>
         </div>

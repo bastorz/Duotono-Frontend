@@ -46,6 +46,8 @@ const Page = ({ params }: { params: { collectionSlug: string } }) => {
       return false;
     });
 
+  console.log('filteredProducts:', filteredProducts);
+
   return (
     <div>
       <div className="xl:px-32 px-8 py-20 flex flex-col space-y-6 h-full">
@@ -110,27 +112,29 @@ const Page = ({ params }: { params: { collectionSlug: string } }) => {
               <p className="text-gray-500 max-w-[300px]">
                 {removeHTMLTags(item.product.description)}
               </p>
-              <p className="text-gray-500">1000 unidades por</p>
-              <div className="flex space-x-5">
-                {formatCurrency(
-                  item.product.customFields.Precio1000Unidades
-                ) !== '0,00€' ? (
-                  <div className="flex space-x-4">
+              {item.product.customFields.Precio1000Unidades !==
+              parseInt('0,00') ? (
+                <div>
+                  <p className="text-gray-500">1000 unidades por</p>
+                  <div className="flex items-center space-x-5 pt-2">
                     <p className="text-red-500">
                       {formatCurrency(item.product.customFields.PrecioBase)}
                     </p>
-                    <p className="font-bold text-xl mt-1">
+                    <p className="font-bold text-xl">
                       {formatCurrency(
                         item.product.customFields.Precio1000Unidades
                       )}
                     </p>
                   </div>
-                ) : (
+                </div>
+              ) : (
+                <div>
+                  {' '}
                   <p className="font-bold text-xl">
                     {formatCurrency(item.product.customFields.PrecioBase)}
                   </p>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

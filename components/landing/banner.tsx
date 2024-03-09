@@ -14,7 +14,7 @@ const Banner = () => {
       url: './banner2.jpg',
     },
     {
-      url: './banner3.jpg',
+      url: './banner4.jpeg',
     },
   ];
 

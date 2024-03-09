@@ -24,7 +24,7 @@ export function StripePayments({
     if (isMyOwnDesign === 'Si') {
       setRedirectUrl('/tienda/checkout/cargar-mi-diseno');
     } else {
-      setRedirectUrl('/compra-realizada');
+      setRedirectUrl('/tienda/checkout/compra-realizada-sin-diseno');
     }
   }, [isMyOwnDesign]);
 
