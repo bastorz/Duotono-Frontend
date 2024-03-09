@@ -26,13 +26,16 @@ const Footer = () => {
   return (
     <div className="w-full pt-20 pb-10 px-8 xl:px-20 bg-black">
       <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-4 place-items-center xl:place-items-start">
-        <div className="flex flex-col gap-y-10">
+        <div className="flex flex-col items-center gap-y-10">
           <Link href="/" className="">
-            <h3 className="text-white text-4xl text-center xl:text-left">
-              Duotono Design
-            </h3>
+            <Image
+              src="/logo_nuevo_amarillo.png"
+              alt="Duotono Logo"
+              width={200}
+              height={200}
+            />
           </Link>
-          <p className="text-white xl:text-left text-lg text-center">
+          <p className="text-white text-lg text-center">
             ¡Resalta con Duotono! Expande tu marca gracias a la impresión
             digital.
           </p>
@@ -129,7 +132,7 @@ const Footer = () => {
                     <Link href="/" className="text-white">Centro de ayuda</Link>
                 </div> */}
       </div>
-      <div className="flex flex-col space-y-10 mt-20 mx-0 xl:mx-20">
+      <div className="flex flex-col space-y-10 mx-0 xl:mx-20">
         <div className="w-full h-[1px] bg-terciary"></div>
         <p className="text-white text-lg text-center">
           Copyright © {currentYear} Duotono Design | Todos los derechos

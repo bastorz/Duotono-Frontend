@@ -66,16 +66,17 @@ const Navbar = () => {
         )}
         onClick={toggleNav}
       >
-        <div className="flex items-center justify-between px-8 md:px-[40px] lg:px-10 py-4">
+        <div className="flex items-center justify-between px-4 md:px-[40px] lg:px-10 py-4">
           <Link href="/" className="flex gap-x-2">
             <Image
-              src="/Logo.svg"
+              src="/logo_nuevo.png"
               alt="Duotono Logo"
               width={200}
               height={200}
+              className="pt-2"
             />
           </Link>
-          <Tally3 className="rotate-90 mt-2" width={30} height={30} />
+          <Tally3 className="rotate-90 mt-2" width={40} height={40} />
         </div>
       </div>
 
@@ -134,11 +135,11 @@ const Navbar = () => {
       )}
 
       {screenWidth > 1025 && (
-        <nav className="flex items-center justify-evenly">
+        <nav className="flex items-center justify-evenly py-2">
           <div className="relative flex h-16 items-center">
             <Link href="/" className="flex gap-x-2">
               <Image
-                src="/Logo.svg"
+                src="/logo_nuevo.png"
                 alt="Duotono Logo"
                 width={200}
                 height={200}

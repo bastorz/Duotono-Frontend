@@ -55,7 +55,7 @@ const Page = ({ params }: { params: { collectionSlug: string } }) => {
         <p className="text-lg max-w-[20rem] xl:max-w-[50rem]">
           {removeHTMLTags(collectionsData?.collection.description)}
         </p>
-        <div className="space-y-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-20 place-items-center">
+        <div className="space-y-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-20 bg-blue-300">
           {collectionsData?.collection.children.map((subcategory, i) => (
             <div className="flex flex-col h-full justify-between py-10" key={i}>
               <Link
@@ -86,8 +86,13 @@ const Page = ({ params }: { params: { collectionSlug: string } }) => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="grid grid-cols-4">
           {filteredProducts?.map((item) => (
-            <div key={item.name} className="flex flex-col space-y-4 ">
+            <div
+              key={item.name}
+              className="flex flex-col space-y-4 justify-center"
+            >
               <Link
                 href={`/tienda/productos/${item.product.slug}`}
                 className="min-h-[300px] relative group"
@@ -107,12 +112,24 @@ const Page = ({ params }: { params: { collectionSlug: string } }) => {
               </p>
               <p className="text-gray-500">1000 unidades por</p>
               <div className="flex space-x-5">
-                <p className="text-red-500">
-                  {formatCurrency(item.product.customFields.PrecioBase)}
-                </p>
-                <p className="font-bold text-xl">
-                  {formatCurrency(item.product.customFields.Precio1000Unidades)}
-                </p>
+                {formatCurrency(
+                  item.product.customFields.Precio1000Unidades
+                ) !== '0,00€' ? (
+                  <div className="flex space-x-4">
+                    <p className="text-red-500">
+                      {formatCurrency(item.product.customFields.PrecioBase)}
+                    </p>
+                    <p className="font-bold text-xl mt-1">
+                      {formatCurrency(
+                        item.product.customFields.Precio1000Unidades
+                      )}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="font-bold text-xl">
+                    {formatCurrency(item.product.customFields.PrecioBase)}
+                  </p>
+                )}
               </div>
             </div>
           ))}

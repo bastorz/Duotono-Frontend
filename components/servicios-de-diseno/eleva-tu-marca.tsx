@@ -44,7 +44,7 @@ const ElevaTuMarca = () => {
           </Link>
         </div>
       </div>
-      <div className="my-20">
+      <div>
         <Carousel slides={[...slides]} dotColor={'black'} />
       </div>
     </div>

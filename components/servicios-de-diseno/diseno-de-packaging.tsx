@@ -24,12 +24,12 @@ const DisenoDePackaging = () => {
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center">
-      <div className="my-20 order-2 xl:order-1">
+      <div className="order-2 xl:order-1">
         <Carousel slides={[...slides]} dotColor={'black'} />
       </div>
-      <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8 order-1 xl:order-2">
+      <div className="mt-10 mx-10 xl:mx-0 space-y-8 order-1 xl:order-2">
         <h3 className="font-bold text-5xl xl:text-5xl max-w-2xl text-center xl:text-left">
-          Diseño de Packaging: Deja Huella en Cada Producto
+          Deja Huella en Cada Producto
         </h3>
         <p className="text-black max-w-[600px] text-center xl:text-left xl:text-lg">
           Transformamos envases en experiencias. Captura la atención y el

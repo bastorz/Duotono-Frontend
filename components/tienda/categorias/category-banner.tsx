@@ -16,7 +16,7 @@ const CategoryBanner = () => {
       </div>
       <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8 order-1 xl:order-2">
         <h3 className="font-bold text-5xl xl:text-4xl max-w-2xl text-center xl:text-left">
-          Diseño de Packaging: Deja Huella en Cada Producto
+          Deja Huella en Cada Producto
         </h3>
         <p className="text-black max-w-[600px] text-center xl:text-left">
           Transformamos envases en experiencias. Captura la atención y el

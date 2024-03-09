@@ -24,7 +24,7 @@ const TuEmpresaBrille = () => {
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center">
-      <div className="my-20 order-2 xl:order-1">
+      <div className="order-2 xl:order-1">
         <Carousel slides={[...slides]} dotColor={'black'} />
       </div>
       <div className="mt-10 xl:my-20 mx-10 xl:mx-0 space-y-8 order-1 xl:order-2">

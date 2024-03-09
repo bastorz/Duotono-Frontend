@@ -7,7 +7,7 @@ const PorDondeComenzar = () => {
     <div className="grid grid-cols-1 xl:grid-cols-2 w-full place-items-center xl:px-32">
       <div className="my-20 order-2 xl:order-1">
         <Image
-          src="/18.png"
+          src="/contacta_con_nosotros.jpg"
           alt="1"
           width={700}
           height={700}
